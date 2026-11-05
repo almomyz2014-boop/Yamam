@@ -1,0 +1,1133 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>لوحة مؤشرات الأداء التفاعلية ٢٠٢٦ — هياء راشد محمد العرفج</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root{
+        --bg:#F5F0E5;
+        --surface:#FFFDF7;
+        --surface-2:#EFE8D8;
+        --ink:#2E2A22;
+        --muted:#6E6A5C;
+        --line:#E0D7C3;
+        --sage:#7D8C74;
+        --sage-mid:#5F7155;
+        --sage-dark:#43553A;
+        --sage-deep:#2F3D29;
+        --sage-soft:#DFE6D3;
+        --sage-ghost:#EDF1E4;
+        --gold:#A98548;
+        --gold-dark:#8A6C36;
+        --gold-soft:#F0E4C9;
+        --clay:#B0563B;
+        --chip-bg:#FFFDF7;
+        --shadow:0 1px 2px rgba(62,58,40,.06),0 8px 24px -12px rgba(62,58,40,.18);
+        color-scheme:light;
+      }
+      @media (prefers-color-scheme: dark){
+        :root{
+          --bg:#14170F;
+          --surface:#20251B;
+          --surface-2:#272D20;
+          --ink:#EFECE1;
+          --muted:#A8AB9C;
+          --line:#3A4130;
+          --sage:#93A586;
+          --sage-mid:#A9BC9C;
+          --sage-dark:#C3D2B4;
+          --sage-deep:#10130C;
+          --sage-soft:#39432F;
+          --sage-ghost:#262C1F;
+          --gold:#C4A05E;
+          --gold-dark:#D3B273;
+          --gold-soft:#3A3320;
+          --clay:#CE7B5F;
+          --chip-bg:#20251B;
+          --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.5);
+          color-scheme:dark;
+        }
+      }
+      *{box-sizing:border-box}
+      html{scroll-behavior:smooth}
+      @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+      body{
+        margin:0;background:var(--bg);color:var(--ink);
+        font-family:"IBM Plex Sans Arabic",system-ui,sans-serif;
+        font-size:16px;line-height:1.65;
+        overflow-x:clip;
+      }
+      .num{font-variant-numeric:tabular-nums lining-nums;letter-spacing:.1px}
+      .wrap{max-width:1180px;margin:0 auto;padding:0 16px 40px}
+
+      /* ---------- Header ---------- */
+      header.hero{
+        background:var(--sage-deep);color:#F3EFE2;
+        padding:28px 0 24px;margin-bottom:22px;
+      }
+      header.hero .wrap{padding-bottom:0}
+      .hero h1{margin:0 0 4px;font-size:clamp(24px,4.6vw,36px);font-weight:700;line-height:1.35}
+      .hero .who{font-size:clamp(16px,2.8vw,20px);font-weight:700;color:#EFD9A0}
+      .hero .period{margin-top:4px;font-size:14.5px;color:#DCE3CF;line-height:1.8}
+      .hero .motto{margin-top:12px;font-size:14.5px;color:#B9C3AB;line-height:1.9;max-width:640px}
+      .hero .motto b{color:#EFD9A0;font-weight:600}
+      .hero .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+      .hero .badge{
+        background:rgba(255,253,247,.1);border:1px solid rgba(255,253,247,.28);
+        color:#F3EFE2;border-radius:999px;padding:4px 14px;font-size:13.5px;font-weight:600;
+      }
+      .hero .badge strong{color:#EFD9A0}
+
+      /* ---------- KPI cards ---------- */
+      .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+      @media (max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}}
+      @media (max-width:460px){.kpis{grid-template-columns:1fr}}
+      .kpi{
+        background:var(--surface);border:1px solid var(--line);border-radius:14px;
+        padding:16px 16px 14px;box-shadow:var(--shadow);cursor:pointer;
+        transition:transform .15s ease,border-color .15s ease;text-align:right;width:100%;
+        font-family:inherit;color:inherit;
+      }
+      .kpi:hover{transform:translateY(-2px);border-color:var(--sage)}
+      .kpi:focus-visible{outline:3px solid var(--sage);outline-offset:2px}
+      @media (prefers-reduced-motion: reduce){ .kpi:hover{transform:none} }
+      .kpi .k-label{font-size:14px;font-weight:600;color:var(--muted);line-height:1.5}
+      .kpi .k-value{font-size:36px;font-weight:700;color:var(--sage-dark);line-height:1.15;margin:2px 0}
+      .kpi .k-value small{font-size:16px;font-weight:600;color:var(--muted)}
+      .kpi .k-sub{font-size:13px;color:var(--muted);line-height:1.6}
+      .kpi .k-sub b{color:var(--ink);font-weight:600}
+      .status-chip{
+        display:inline-block;background:var(--sage-ghost);color:var(--sage-dark);
+        border:1px solid var(--sage-soft);border-radius:999px;
+        font-size:12.5px;font-weight:700;padding:2px 10px;margin-top:10px;
+      }
+
+      /* ---------- Nav chips ---------- */
+      .nav-bar{
+        position:sticky;top:10px;z-index:20;
+        background:var(--surface);border:1px solid var(--line);border-radius:16px;
+        box-shadow:var(--shadow);padding:13px 16px;margin-bottom:18px;
+      }
+      .nav-bar .n-label{font-size:13.5px;font-weight:700;color:var(--muted);margin-bottom:8px}
+      .chips{display:flex;flex-wrap:wrap;gap:8px}
+      .chip{
+        font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;
+        background:var(--chip-bg);color:var(--ink);
+        border:1.5px solid var(--line);border-radius:999px;padding:6px 15px;
+        transition:background .12s ease,border-color .12s ease,color .12s ease;
+        text-decoration:none;display:inline-block;
+      }
+      .chip:hover{border-color:var(--sage)}
+      .chip[aria-pressed="true"]{background:var(--sage-dark);border-color:var(--sage-dark);color:#FFFDF7}
+      @media (prefers-color-scheme: dark){ .chip[aria-pressed="true"]{color:#14170F} }
+      .chip:focus-visible{outline:3px solid var(--sage);outline-offset:2px}
+
+      /* ---------- Sections / cards ---------- */
+      section.card{
+        background:var(--surface);border:1px solid var(--line);border-radius:16px;
+        box-shadow:var(--shadow);padding:20px 20px 18px;margin-bottom:18px;
+        scroll-margin-top:76px;
+      }
+      section.card > h2{
+        margin:0 0 4px;font-size:20px;font-weight:700;color:var(--ink);
+        display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+      }
+      section.card > h2 .tag{
+        font-size:12.5px;font-weight:700;background:var(--gold-soft);color:var(--gold-dark);
+        border-radius:999px;padding:2px 11px;
+      }
+      section.card > p.lead{margin:0 0 14px;color:var(--muted);font-size:14.5px;line-height:1.8}
+      section.card > p.lead b{color:var(--ink)}
+      .note{
+        background:var(--sage-ghost);border:1px solid var(--sage-soft);border-radius:12px;
+        padding:12px 16px;font-size:14px;line-height:1.85;color:var(--ink);margin-top:14px;
+      }
+      .note b{color:var(--sage-dark)}
+      .note.gold{background:var(--gold-soft)}
+      .note.gold b{color:var(--gold-dark)}
+      @media (prefers-color-scheme: dark){ .note.gold b{color:var(--gold)} }
+
+      /* ---------- Charts ---------- */
+      .chart{width:100%}
+      .chart svg{display:block;width:100%;height:auto}
+      .chart .bar-rect{cursor:pointer;transition:opacity .15s ease}
+      .chart .bar-rect:hover{opacity:.82}
+      .chart text{font-family:inherit}
+      .two-col{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+      @media (max-width:860px){.two-col{grid-template-columns:1fr}}
+      .sub-h{font-size:16px;font-weight:700;margin:4px 0 10px;color:var(--ink)}
+      .sub-h span{color:var(--muted);font-weight:500;font-size:13px}
+      .chart-legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin:4px 0 8px;font-size:14px}
+      .chart-legend .li{display:flex;align-items:center;gap:7px}
+      .chart-legend .dot{width:13px;height:13px;border-radius:4px;flex:none}
+      .chart-legend b{font-weight:700}
+
+      /* horizontal bars (HTML) */
+      .hbars{display:flex;flex-direction:column;gap:9px}
+      .hbar{
+        display:grid;grid-template-columns:150px 1fr 74px;align-items:center;gap:10px;
+        background:none;border:none;font-family:inherit;color:inherit;text-align:right;
+        padding:2px 4px;border-radius:8px;width:100%;
+      }
+      button.hbar{cursor:pointer}
+      button.hbar:hover{background:var(--sage-ghost)}
+      button.hbar:focus-visible{outline:3px solid var(--sage);outline-offset:1px}
+      .hbar .h-label{font-size:14px;font-weight:600;line-height:1.45}
+      .hbar .h-track{height:16px;background:var(--sage-ghost);border-radius:99px;overflow:hidden}
+      .hbar .h-fill{display:block;height:100%;border-radius:99px;background:var(--sage);transition:width .3s ease,background .15s ease}
+      .hbar.sel .h-fill{background:var(--sage-dark)}
+      .hbar.dim .h-fill{background:var(--sage-soft)}
+      .hbar .h-val{font-size:15px;font-weight:700;color:var(--sage-dark);text-align:left}
+      .hbar .h-val small{display:block;font-size:11.5px;color:var(--muted);font-weight:500}
+      @media (max-width:520px){ .hbar{grid-template-columns:108px 1fr 58px} .hbar .h-label{font-size:13px} }
+      @media (prefers-reduced-motion: reduce){ .hbar .h-fill{transition:none} }
+
+      /* stacked bar */
+      .stack{display:flex;height:34px;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+      .stack div{height:100%}
+      .stack .s-a{background:var(--sage)}
+      .stack .s-b{background:var(--gold)}
+      .stack .s-c{background:var(--sage-dark)}
+      .legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:12px;font-size:14px}
+      .legend .li{display:flex;align-items:center;gap:7px}
+      .legend .dot{width:13px;height:13px;border-radius:4px;flex:none}
+      .legend b{font-weight:700}
+
+      /* donut */
+      .donut-wrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+      .donut-wrap svg{flex:none}
+      .donut-legend{display:flex;flex-direction:column;gap:7px;font-size:14px;flex:1;min-width:190px}
+      .donut-legend .li{display:flex;align-items:center;gap:8px}
+      .donut-legend .dot{width:13px;height:13px;border-radius:4px;flex:none}
+      .donut-legend b{font-weight:700}
+      .donut-legend .pct{color:var(--muted);font-size:13px}
+
+      /* ---------- Goal detail ---------- */
+      .goal-detail{
+        background:var(--sage-ghost);border:1px solid var(--sage-soft);border-radius:14px;
+        padding:16px 18px;margin-top:16px;
+      }
+      .goal-detail h3{margin:0 0 6px;font-size:17px;font-weight:700;color:var(--sage-dark)}
+      .goal-detail p{margin:0 0 8px;font-size:14.5px;line-height:1.85}
+      .goal-detail p:last-child{margin-bottom:0}
+      .goal-detail .gd-meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:14px;margin-bottom:10px}
+      .goal-detail .gd-meta b{color:var(--sage-dark);font-size:16px}
+      .goal-detail .bar{height:9px;background:var(--surface);border:1px solid var(--sage-soft);border-radius:99px;overflow:hidden;margin-top:4px}
+      .goal-detail .bar i{display:block;height:100%;background:var(--sage);border-radius:99px;transition:width .35s ease}
+      @media (prefers-reduced-motion: reduce){ .goal-detail .bar i{transition:none} }
+
+      /* ---------- Search / lists ---------- */
+      .search-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+      .search-row label{font-size:14px;font-weight:700;color:var(--muted)}
+      .search-input{
+        font-family:inherit;font-size:15px;color:var(--ink);
+        background:var(--chip-bg);border:1.5px solid var(--line);border-radius:12px;
+        padding:9px 14px;flex:1;min-width:200px;
+      }
+      .search-input:focus-visible{outline:3px solid var(--sage);outline-offset:1px}
+      .count-line{font-size:13.5px;color:var(--muted)}
+      .count-line b{color:var(--sage-dark);font-size:15px}
+      .course-list{
+        list-style:none;margin:0;padding:0;
+        display:grid;grid-template-columns:1fr 1fr;gap:8px 22px;
+      }
+      @media (max-width:760px){.course-list{grid-template-columns:1fr}}
+      .course-list li{
+        display:flex;gap:10px;align-items:flex-start;
+        padding:8px 12px;border:1px solid var(--line);border-radius:10px;
+        background:var(--surface);font-size:14.5px;line-height:1.6;
+      }
+      .course-list .no{
+        flex:none;width:26px;height:26px;border-radius:8px;
+        background:var(--sage-ghost);color:var(--sage-dark);
+        font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;
+        margin-top:1px;
+      }
+      .empty-msg{display:none;padding:18px;text-align:center;color:var(--muted);font-size:14.5px;border:1px dashed var(--line);border-radius:12px}
+
+      /* achievements */
+      .ach-list{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+      .ach-list li{
+        display:flex;gap:12px;align-items:flex-start;
+        border:1px solid var(--line);border-radius:12px;padding:11px 14px;background:var(--surface);
+      }
+      .ach-list .no{
+        flex:none;width:28px;height:28px;border-radius:50%;
+        background:var(--sage);color:#FFFDF7;font-size:13.5px;font-weight:700;
+        display:flex;align-items:center;justify-content:center;margin-top:2px;
+      }
+      @media (prefers-color-scheme: dark){ .ach-list .no{color:#14170F} }
+      .ach-list .a-body{flex:1;font-size:14.5px;line-height:1.7}
+      .ach-list .a-date{
+        flex:none;font-size:12.5px;font-weight:700;color:var(--gold-dark);
+        background:var(--gold-soft);border-radius:999px;padding:2px 11px;margin-top:2px;white-space:nowrap;
+      }
+      @media (prefers-color-scheme: dark){ .ach-list .a-date{color:var(--gold)} }
+      @media (max-width:520px){ .ach-list li{flex-wrap:wrap} }
+
+      /* initiatives */
+      .init-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+      @media (max-width:960px){.init-grid{grid-template-columns:1fr}}
+      .init-card{
+        border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:var(--surface);
+        display:flex;flex-direction:column;gap:8px;
+      }
+      .init-card h3{margin:0;font-size:16.5px;font-weight:700;color:var(--sage-dark);line-height:1.55}
+      .init-card .slogan{font-size:14px;font-weight:700;color:var(--gold-dark)}
+      @media (prefers-color-scheme: dark){ .init-card .slogan{color:var(--gold)} }
+      .init-card p{margin:0;font-size:14px;line-height:1.85;color:var(--ink)}
+      .init-card ul{margin:0;padding:0 18px 0 0;font-size:14px;line-height:1.85}
+      .init-card .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+      .init-card .meta span{
+        font-size:12.5px;font-weight:600;background:var(--sage-ghost);color:var(--sage-dark);
+        border:1px solid var(--sage-soft);border-radius:999px;padding:2px 10px;
+      }
+      .init-grid.two{grid-template-columns:1fr 1fr}
+      @media (max-width:860px){.init-grid.two{grid-template-columns:1fr}}
+
+      /* reports */
+      .report-list{display:flex;flex-direction:column;gap:10px}
+      .report{
+        border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden;
+      }
+      .report > button{
+        width:100%;text-align:right;font-family:inherit;color:inherit;cursor:pointer;
+        background:none;border:none;padding:13px 16px;
+        display:flex;align-items:center;gap:10px;font-size:15.5px;font-weight:700;
+      }
+      .report > button:hover{background:var(--sage-ghost)}
+      .report > button:focus-visible{outline:3px solid var(--sage);outline-offset:-3px}
+      .report > button .chev{margin-right:auto;color:var(--sage-dark);font-size:13px;flex:none;transition:transform .2s ease}
+      .report.open > button .chev{transform:rotate(180deg)}
+      .report .r-body{display:none;padding:2px 16px 14px;font-size:14.5px;line-height:1.85}
+      .report.open .r-body{display:block}
+      .report .r-body .r-meta{color:var(--muted);font-size:13.5px;margin-bottom:8px;line-height:1.8}
+      .report .r-body .r-meta b{color:var(--ink)}
+      .report .r-body ul{margin:0;padding:0 18px 0 0}
+      .daily-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+      .daily-list li{
+        display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.7;
+        border:1px solid var(--line);border-radius:10px;padding:9px 13px;background:var(--surface);
+      }
+      .daily-list .no{
+        flex:none;width:24px;height:24px;border-radius:7px;background:var(--gold-soft);
+        color:var(--gold-dark);font-size:12.5px;font-weight:700;
+        display:flex;align-items:center;justify-content:center;margin-top:2px;
+      }
+      @media (prefers-color-scheme: dark){ .daily-list .no{color:var(--gold)} }
+
+      /* circulars */
+      .circ-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 22px}
+      @media (max-width:820px){.circ-list{grid-template-columns:1fr}}
+      .circ-list li{
+        display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.7;
+        border:1px solid var(--line);border-radius:10px;padding:9px 13px;background:var(--surface);
+      }
+      .circ-list .no{
+        flex:none;width:26px;height:26px;border-radius:8px;background:var(--sage-ghost);
+        color:var(--sage-dark);font-size:13px;font-weight:700;
+        display:flex;align-items:center;justify-content:center;margin-top:1px;
+      }
+      .circ-list .who-to{display:block;font-size:12.5px;color:var(--muted)}
+
+      /* stat tiles */
+      .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+      @media (max-width:900px){.tiles{grid-template-columns:repeat(2,1fr)}}
+      @media (max-width:440px){.tiles{grid-template-columns:1fr}}
+      .tile{
+        background:var(--sage-ghost);border:1px solid var(--sage-soft);border-radius:12px;padding:13px 15px;
+      }
+      .tile .t-label{font-size:13.5px;font-weight:600;color:var(--muted);line-height:1.55}
+      .tile .t-value{font-size:27px;font-weight:700;color:var(--sage-dark);line-height:1.25}
+      .tile .t-value small{font-size:14px;color:var(--muted);font-weight:600}
+      .tile .t-cap{font-size:12.5px;color:var(--muted);line-height:1.6}
+      .tile .bar{height:8px;background:var(--surface);border-radius:99px;margin-top:9px;overflow:hidden}
+      .tile .bar i{display:block;height:100%;background:var(--sage);border-radius:99px}
+
+      /* tables */
+      .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+      table{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--surface)}
+      th,td{padding:9px 14px;text-align:right;border-bottom:1px solid var(--line);vertical-align:top}
+      td.name,th.name{white-space:normal;min-width:170px;line-height:1.7}
+      thead th{background:var(--surface-2);font-weight:700;color:var(--ink);border-bottom:2px solid var(--line);white-space:nowrap}
+      tbody tr:last-child td{border-bottom:none}
+      @media (max-width:640px){
+        .table-wrap{overflow-x:visible;border:none}
+        table,tbody,tr,td{display:block;width:100%}
+        thead{display:none}
+        tbody tr{border:1px solid var(--line);border-radius:12px;margin-bottom:10px;padding:8px 4px;background:var(--surface)}
+        td{border-bottom:none;padding:5px 12px}
+        td::before{content:attr(data-l);display:block;font-size:12px;font-weight:700;color:var(--muted)}
+      }
+
+      /* bio */
+      .bio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px 22px}
+      @media (max-width:860px){.bio-grid{grid-template-columns:repeat(2,1fr)}}
+      @media (max-width:520px){.bio-grid{grid-template-columns:1fr}}
+      .bio-item{border-bottom:1px solid var(--line);padding:8px 2px}
+      .bio-item .b-l{font-size:12.5px;font-weight:700;color:var(--muted)}
+      .bio-item .b-v{font-size:15px;font-weight:600;line-height:1.6}
+
+      footer.site{text-align:center;color:var(--muted);font-size:14px;padding:14px 0 6px;line-height:1.9}
+      footer.site .f-name{font-weight:700;color:var(--ink);font-size:15.5px}
+    </style>
+  </head>
+  <body>
+
+    <header class="hero">
+      <div class="wrap">
+        <h1>لوحة مؤشرات الأداء التفاعلية ٢٠٢٦</h1>
+        <div class="who">هياء راشد محمد العرفج</div>
+        <div class="period">مساعد إداري متقدم · المرتبة الثامنة · المتوسطة الخامسة بالدلم · إدارة التعليم بمنطقة الرياض</div>
+        <p class="motto"><b>رُبَّ همّةٍ تُحيي أمّة.</b> اخلص بقلبك وعقلك وروحك حتى لأقلّ أعمالك قيمةً — هذا هو سرّ النجاح.</p>
+        <div class="badges">
+          <span class="badge">مدة الخدمة: <strong class="num">24 سنة</strong></span>
+          <span class="badge">المؤهل: <strong>بكالوريوس اقتصاد منزلي</strong></span>
+          <span class="badge">مديرة المدرسة: <strong>نورة عبدالله الجدوع</strong></span>
+          <span class="badge">الأهداف الخمسة تحققت جميعاً — وتجاوز المنجزُ المستهدفَ في أربعة منها</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="wrap">
+
+      <!-- ===== KPI cards ===== -->
+      <div class="kpis" role="group" aria-label="بطاقات المؤشرات الرئيسية">
+        <button class="kpi" data-goto="sec-goals" type="button">
+          <div class="k-label">أهداف ميثاق الأداء الجديدة لعام ٢٠٢٦م</div>
+          <div class="k-value num"><span data-count="5">5</span> <small>أهداف</small></div>
+          <div class="k-sub">بأوزان نسبية مجموعها <b class="num">100٪</b> — تحققت جميعاً</div>
+          <span class="status-chip">ميثاق ٢٠٢٦م المعتمد</span>
+        </button>
+        <button class="kpi" data-goto="sec-ach" type="button">
+          <div class="k-label">الإنجازات الموثقة في عام ٢٠٢٦م</div>
+          <div class="k-value num"><span data-count="16">16</span> <small>منجزاً</small></div>
+          <div class="k-sub">إضافة إلى <b class="num">15</b> منجزاً في أرشيف عام ٢٠٢٥م</div>
+          <span class="status-chip">المجموع ٣١ منجزاً موثقاً</span>
+        </button>
+        <button class="kpi" data-goto="sec-courses" type="button">
+          <div class="k-label">الدورات التدريبية والإثرائية</div>
+          <div class="k-value num"><span data-count="45">45</span> <small>دورة</small></div>
+          <div class="k-sub"><b class="num">30</b> تدريب · <b class="num">15</b> إثرائي · بواقع يوم لكل دورة</div>
+          <span class="status-chip">٤٥ يوماً تدريبياً</span>
+        </button>
+        <button class="kpi" data-goto="sec-init" type="button">
+          <div class="k-label">مبادرات عام ١٤٤٧هـ</div>
+          <div class="k-value num"><span data-count="3">3</span> <small>مبادرات</small></div>
+          <div class="k-sub">اليوم الوطني · شتاء دافئ · صندوق العطاء — إضافة إلى مبادرتين مدرسيتين بإشرافها</div>
+          <span class="status-chip">تنفيذ مبادرة اليوم الوطني ١٠٠٪</span>
+        </button>
+        <button class="kpi" data-goto="sec-vol" type="button">
+          <div class="k-label">ساعات التطوع الموثقة بالأرقام</div>
+          <div class="k-value num"><span data-count="36">36</span> <small>ساعة</small></div>
+          <div class="k-sub"><b class="num">4</b> فرص تطوعية — إضافة إلى سنة كاملة بمدرسة أم جميل لتحفيظ القرآن الكريم</div>
+          <span class="status-chip">تطوع موثق</span>
+        </button>
+        <button class="kpi" data-goto="sec-prodev" type="button">
+          <div class="k-label">الحاصلات على الرخصة المهنية بالمدرسة</div>
+          <div class="k-value num"><span data-count="20">20</span> <small>معلمة</small></div>
+          <div class="k-sub">من أصل <b class="num">23</b> معلمة في كشف التطوير المهني — بنسبة <b class="num">87٪</b></div>
+          <span class="status-chip">توثيق التطوير المهني</span>
+        </button>
+      </div>
+
+      <!-- ===== Section nav ===== -->
+      <nav class="nav-bar" aria-label="محاور ملف الإنجاز">
+        <div class="n-label">محاور الملف — انقر للانتقال إلى القسم</div>
+        <div class="chips">
+          <a class="chip" href="#sec-goals">الأهداف والميثاق</a>
+          <a class="chip" href="#sec-courses">الدورات التدريبية</a>
+          <a class="chip" href="#sec-ach">الإنجازات</a>
+          <a class="chip" href="#sec-init">المبادرات</a>
+          <a class="chip" href="#sec-vol">الأعمال التطوعية</a>
+          <a class="chip" href="#sec-daily">الإشراف والأعمال اليومية</a>
+          <a class="chip" href="#sec-circ">بيانات الاطلاع</a>
+          <a class="chip" href="#sec-prodev">التطوير المهني</a>
+          <a class="chip" href="#sec-bio">السيرة والملخص</a>
+        </div>
+      </nav>
+
+      <!-- ===== Goals: target vs achieved ===== -->
+      <section class="card" id="sec-goals" aria-label="قسم أهداف الميثاق">
+        <h2>المستهدف مقابل المنجز <span class="tag">أهداف الميثاق الخمسة</span></h2>
+        <p class="lead">مقارنة الناتج المستهدف في ميثاق أداء الموظف لعام ٢٠٢٦م بما تحقق فعلياً لكل هدف. تحققت الأهداف الخمسة جميعاً، وتجاوز المنجزُ المستهدفَ في أربعة منها. <b>انقر أي هدف في الرسم أو من الأزرار أسفله لعرض بطاقته كاملة بنص الميثاق.</b></p>
+        <div class="chart-legend" aria-hidden="true">
+          <span class="li"><span class="dot" style="background:var(--gold)"></span>المستهدف</span>
+          <span class="li"><span class="dot" style="background:var(--sage)"></span>المنجز الموثق</span>
+        </div>
+        <div class="chart" id="chGoals" role="img" aria-label="رسم أعمدة مزدوجة للمستهدف مقابل المنجز: الهدف الأول ٩ مقابل ١٢، الهدف الثاني ١ مقابل ٢، الهدف الثالث ١ مقابل ١، الهدف الرابع ٢ مقابل ٩، الهدف الخامس ١ مقابل ٢"></div>
+        <div class="chips" id="goalChips" role="group" aria-label="اختيار هدف الميثاق" style="margin-top:10px"></div>
+        <div class="goal-detail" id="goalDetail" aria-live="polite"></div>
+        <div class="two-col" style="margin-top:22px">
+          <div>
+            <div class="sub-h">أوزان الأهداف النسبية <span>— مجموعها ١٠٠٪</span></div>
+            <div class="donut-wrap">
+              <div class="chart" id="chGoalWeights" style="width:auto" role="img" aria-label="مخطط دائري لأوزان الأهداف: الأول ٢٠ بالمئة، الثاني ٢٠ بالمئة، الثالث ٢٥ بالمئة، الرابع ١٥ بالمئة، الخامس ٢٠ بالمئة"></div>
+              <div class="donut-legend" id="goalWeightsLegend"></div>
+            </div>
+          </div>
+          <div>
+            <div class="sub-h">أوزان الكفاءات <span>— مجموعها ١٠٠٪</span></div>
+            <div class="hbars" id="compBars"></div>
+            <p style="font-size:13.5px;color:var(--muted);line-height:1.8;margin:10px 0 0" id="compDesc">اختر كفاءة لعرض وصفها السلوكي من الميثاق المعتمد.</p>
+          </div>
+        </div>
+        <div class="note"><b>الكفاءات الأربع في الميثاق:</b> المسؤولية ٢٠٪ · العمل الجماعي ٢٥٪ · المرونة للتغيير ٣٠٪ · المبادرة ٢٥٪ — والأوصاف السلوكية أعلاه منقولة من نموذج الميثاق الرسمي المعتمد لوزارة التعليم.</div>
+      </section>
+
+      <!-- ===== Courses ===== -->
+      <section class="card" id="sec-courses" aria-label="قسم الدورات التدريبية">
+        <h2>الدورات التدريبية <span class="tag">٤٥ دورة · ٤٥ يوماً تدريبياً</span></h2>
+        <p class="lead">كل دورة امتدت يوماً واحداً، فبلغ مجموع الأيام التدريبية <b class="num">45</b> يوماً. جهتا برامج التدريب: <b>الإدارة العامة لتطوير الموارد البشرية</b> و<b>معهد الإدارة العامة</b>. ابحث بالاسم لتصفية القائمة فوراً.</p>
+        <div class="two-col" style="margin-bottom:18px">
+          <div>
+            <div class="sub-h">الدورات بحسب النوع</div>
+            <div class="stack" aria-hidden="true">
+              <div class="s-a" style="width:66.7%"></div>
+              <div class="s-b" style="width:33.3%"></div>
+            </div>
+            <div class="legend">
+              <span class="li"><span class="dot" style="background:var(--sage)"></span>تدريب <b class="num">30</b> · <span class="num">66.7٪</span></span>
+              <span class="li"><span class="dot" style="background:var(--gold)"></span>إثرائي <b class="num">15</b> · <span class="num">33.3٪</span></span>
+            </div>
+          </div>
+          <div>
+            <div class="sub-h">الدورات بحسب السنة</div>
+            <div class="hbars" id="courseYears"></div>
+          </div>
+        </div>
+        <div class="search-row">
+          <label for="courseSearch">بحث في الدورات</label>
+          <input class="search-input" id="courseSearch" type="search" placeholder="مثال: الأمن السيبراني، الموارد البشرية، Excel…" autocomplete="off" />
+          <span class="count-line" id="courseCount" aria-live="polite"></span>
+        </div>
+        <ol class="course-list" id="courseList"></ol>
+        <div class="empty-msg" id="courseEmpty">لا توجد دورة مطابقة لعبارة البحث — جرّب كلمة أقصر.</div>
+      </section>
+
+      <!-- ===== Achievements ===== -->
+      <section class="card" id="sec-ach" aria-label="قسم الإنجازات">
+        <h2>الإنجازات الموثقة <span class="tag">٣١ منجزاً</span></h2>
+        <p class="lead"><b class="num">16</b> منجزاً خلال عام ٢٠٢٦م، و<b class="num">15</b> منجزاً في أرشيف عام ٢٠٢٥م. اختر السنة لتصفية القائمة.</p>
+        <div class="chips" id="achChips" role="group" aria-label="تصفية الإنجازات بحسب السنة">
+          <button class="chip" type="button" data-ach="2026" aria-pressed="true">إنجازات ٢٠٢٦م · <span class="num">16</span></button>
+          <button class="chip" type="button" data-ach="2025" aria-pressed="false">أرشيف ٢٠٢٥م · <span class="num">15</span></button>
+          <button class="chip" type="button" data-ach="all" aria-pressed="false">الكل · <span class="num">31</span></button>
+        </div>
+        <ol class="ach-list" id="achList"></ol>
+        <div class="note"><b>طبيعة الإنجازات:</b> تتركز في دعم المراقبة والتواصل مع أولياء الأمور، وأخذ غياب الطالبات، والجولات التفتيشية، وترتيب الملفات وتنظيمها، وتعبئة جداول الحصص والانتظار، والملاحظة على الاختبارات الشهرية.</div>
+      </section>
+
+      <!-- ===== Initiatives ===== -->
+      <section class="card" id="sec-init" aria-label="قسم المبادرات">
+        <h2>مبادرات عام ١٤٤٧هـ <span class="tag">٣ مبادرات</span></h2>
+        <p class="lead">ثلاث مبادرات موثقة بتقاريرها في ملف الإنجاز لعام ١٤٤٧هـ بالمتوسطة الخامسة بالدلم.</p>
+        <div class="init-grid">
+          <article class="init-card">
+            <h3>المشاركة في الاحتفال باليوم الوطني</h3>
+            <p>مشاركة جميع الإداريات في برنامج الاحتفال باليوم الوطني لعام ١٤٤٧هـ، وبلغت نسبة تنفيذ البرنامج <b class="num">100٪</b>، والمستفيدات طالبات المدرسة.</p>
+            <div class="meta">
+              <span>التاريخ: <span class="num">1447/4/3</span></span>
+              <span>الطالبات: <span class="num">333</span></span>
+              <span>المرحلة: المتوسطة</span>
+              <span>التنفيذ: <span class="num">100٪</span></span>
+            </div>
+          </article>
+          <article class="init-card">
+            <h3>مبادرة شتاء دافئ</h3>
+            <p>عمل خيري إنساني قُدّم مع دخول فصل الشتاء، مستنداً إلى قول الرسول ﷺ: «أيما مسلم كسا مسلماً ثوباً على عري كساه الله من خضر الجنة».</p>
+            <ul>
+              <li>زرع قيمة العطاء والرحمة والشعور بالآخرين</li>
+              <li>مدّ جسور التواصل والتراحم والتكافل الاجتماعي</li>
+            </ul>
+            <div class="meta"><span>عام ١٤٤٧هـ</span><span>عمل خيري إنساني</span></div>
+          </article>
+          <article class="init-card">
+            <h3>مبادرة صندوق العطاء</h3>
+            <div class="slogan">«عطاء صغير.. أثر كبير»</div>
+            <p>إعداد صندوق بشكل جذاب يحتوي أدوات مدرسية أساسية — أقلام حبر وأقلام رصاص ومساحات وبرايات وخرامات ودباسات — ووُضع في مكان محدد داخل المدرسة ليستفيد منه الجميع أثناء اليوم الدراسي.</p>
+            <ul>
+              <li>توفير الأدوات المدرسية للطالبات والموظفات عند الحاجة</li>
+              <li>ترسيخ قيمة العطاء والمشاركة بين الجميع</li>
+              <li>تعزيز المسؤولية والانضباط أثناء استخدام الأدوات</li>
+              <li>خلق بيئة مدرسية داعمة ومحفزة</li>
+            </ul>
+            <div class="meta"><span>الفئة: جميع الطالبات والموظفات</span><span>بالمشاركة ننشر المحبة.. وبالعطاء نصنع أثراً</span></div>
+          </article>
+        </div>
+        <div class="sub-h" style="margin-top:22px">مبادرتان مدرسيتان بإشرافها <span>— عام ١٤٤٧هـ</span></div>
+        <div class="init-grid two">
+          <article class="init-card">
+            <h3>ازرع شجرة واحفظ قطرة</h3>
+            <p>مبادرة بيئية ضمن مجال «قيمنا حياة — بيئتنا خضراء»، نُفذت في فناء المدرسة على مدى أسبوع بمشاركة طالبات الصف الثالث، بتنفيذ المعلمتين منيرة القحطاني ونوف القحطاني واعتماد مديرة المدرسة. شملت خطواتها تحديد أماكن الشتلات، وتجهيز عبوات تحمل شعار «من الهدر إلى الأجر» لإعادة التدوير، وزراعة الشتلات في أحواض جمالية وسقايتها.</p>
+            <div class="meta"><span>التاريخ: <span class="num">1447/4/30</span></span><span>الهدف: تعزيز الهوية الوطنية والحفاظ على البيئة وإعادة التدوير</span></div>
+          </article>
+          <article class="init-card">
+            <h3>اقرأ ليزاد معرفتي</h3>
+            <p>مبادرة قرائية نُفذت في مكتبة المدرسة بمشاركة طالبات الصف الثالث المتوسط، بتنفيذ المعلمة منيرة القحطاني. تناولت قراءات في كتب دينية وثقافية وعلمية وقصص، بما يثري معارف الطالبات ويعزز عادة القراءة لديهن.</p>
+            <div class="meta"><span>من <span class="num">1447/2/24</span> حتى نهاية الفصل الدراسي الأول</span><span>المكان: مكتبة المدرسة</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===== Volunteering ===== -->
+      <section class="card" id="sec-vol" aria-label="قسم الأعمال التطوعية">
+        <h2>الأعمال التطوعية <span class="tag">٣٦ ساعة موثقة + سنة كاملة</span></h2>
+        <p class="lead">مجموع الساعات الموثقة بالأرقام <b class="num">36</b> ساعة في ثلاث فرص، إضافة إلى سنة كاملة من العمل الإداري التطوعي لا تُقاس بالساعات. <b>انقر أي شريط لإبرازه.</b></p>
+        <div class="hbars" id="volBars"></div>
+        <div class="note"><b>سنة كاملة خارج العدّ بالساعات:</b> عمل إداري في مدرسة أم جميل لتحفيظ القرآن الكريم عام ١٤٢٥هـ، من العصر إلى المغرب — ولأنها مقاسة بالسنة لا بالساعة، لم تدخل في رسم الساعات أعلاه.</div>
+        <div class="table-wrap" style="margin-top:16px">
+          <table aria-label="جدول الفرص التطوعية">
+            <thead>
+              <tr><th>الفرصة التطوعية</th><th class="name">الجهة الموفرة</th><th>عدد الساعات</th><th>وقت الفرصة</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-l="الفرصة التطوعية" class="name">تنظيم وترتيب صالة الأنشطة بالمركز</td>
+                <td data-l="الجهة الموفرة">مركز التأهيل الشامل للإناث بالدرعية</td>
+                <td data-l="عدد الساعات"><b class="num">25</b> ساعة</td>
+                <td data-l="وقت الفرصة">١٢ – ٣٠ نوفمبر</td>
+              </tr>
+              <tr>
+                <td data-l="الفرصة التطوعية" class="name">مبادرة رفع مستوى الوعي لدى المجتمع لتجنب مخاطر السيول</td>
+                <td data-l="الجهة الموفرة">إدارة الدفاع المدني</td>
+                <td data-l="عدد الساعات"><b class="num">8</b> ساعات</td>
+                <td data-l="وقت الفرصة">١٣ أكتوبر · ٨ صباحاً – ٤ مساءً</td>
+              </tr>
+              <tr>
+                <td data-l="الفرصة التطوعية" class="name">تجهيز وتشجير المتوسطة الخامسة بالدلم بمنطقة الرياض</td>
+                <td data-l="الجهة الموفرة">وزارة البيئة والمياه والزراعة</td>
+                <td data-l="عدد الساعات"><b class="num">3</b> ساعات</td>
+                <td data-l="وقت الفرصة">٩ أكتوبر · ٩ صباحاً – ١٢ ظهراً</td>
+              </tr>
+              <tr>
+                <td data-l="الفرصة التطوعية" class="name">عمل إداري — سنة كاملة</td>
+                <td data-l="الجهة الموفرة">مدرسة أم جميل لتحفيظ القرآن الكريم</td>
+                <td data-l="عدد الساعات">سنة كاملة</td>
+                <td data-l="وقت الفرصة">عام ١٤٢٥هـ · من العصر إلى المغرب</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===== Daily supervision & works ===== -->
+      <section class="card" id="sec-daily" aria-label="قسم الإشراف اليومي والأعمال اليومية">
+        <h2>الإشراف اليومي والأعمال المنجزة يومياً <span class="tag">٤ تقارير إشراف</span></h2>
+        <p class="lead">أربعة تقارير إشراف يومي بهدف عام مشترك: <b>تعزيز الأسلوب التربوي ومتابعة ورعاية سلوك الطالبات</b>، والمستفيدات هن الطالبات. انقر أي تقرير لعرض مكانه وإجراءاته.</p>
+        <div class="two-col">
+          <div>
+            <div class="sub-h">تقارير الإشراف اليومي <span>(٤)</span></div>
+            <div class="report-list" id="reportList"></div>
+          </div>
+          <div>
+            <div class="sub-h">الأعمال المنجزة يومياً <span>(٦)</span></div>
+            <ol class="daily-list">
+              <li><span class="no num">1</span><span>فتح البريد الإلكتروني والطباعة</span></li>
+              <li><span class="no num">2</span><span>مساعدة الزميلات وقت الفسحة</span></li>
+              <li><span class="no num">3</span><span>تنظيم الطالبات مع المراقبات وتنبيه المعلمات لبدء الحصة</span></li>
+              <li><span class="no num">4</span><span>تنظيم الطالبات وقت الفسحة</span></li>
+              <li><span class="no num">5</span><span>الإشراف كل يوم ثلاثاء</span></li>
+              <li><span class="no num">6</span><span>متابعة المعلومات واللقاءات</span></li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Circulars ===== -->
+      <section class="card" id="sec-circ" aria-label="قسم بيانات الاطلاع على التعاميم">
+        <h2>بيانات الاطلاع على التعاميم <span class="tag">الهدف الأول · ١٢ بياناً</span></h2>
+        <p class="lead">شواهد تنفيذ الهدف الأول من الميثاق: <b class="num">12</b> بيان اطلاع معتمداً بتوقيع مديرة المدرسة الأستاذة نورة عبدالله الجدوع، وأصولها محفوظة لدى المدرسة — مقابل مستهدف <b class="num">9</b> بيانات.</p>
+        <ol class="circ-list" id="circList"></ol>
+        <div class="note">علامة «—» في تاريخ بعض البيانات تعني أن البيان لا يحمل تاريخاً ظاهراً فيما ورد فيه من عنوان وتفاصيل، وكل بيان معتمد بتوقيع مديرة المدرسة.</div>
+      </section>
+
+      <!-- ===== Professional development ===== -->
+      <section class="card" id="sec-prodev" aria-label="قسم توثيق التطوير المهني">
+        <h2>توثيق التطوير المهني لمنسوبات المدرسة <span class="tag">الهدفان الرابع والخامس</span></h2>
+        <p class="lead">من أعمال الموظفة توثيق التطوير المهني لمنسوبات المدرسة داخلها وخارجها — وهو ما يتصل بالهدفين الرابع (تقارير مطابقة الشهادات) والخامس (سجل التطوير المهني) من الميثاق.</p>
+        <div class="tiles">
+          <div class="tile">
+            <div class="t-label">برامج تنمية مهنية داخل المدرسة</div>
+            <div class="t-value num">4 <small>برامج</small></div>
+            <div class="t-cap">بوابة المستقبل · السبورة التفاعلية · استراتيجيات التدريس · الإدارة الصفية الفاعلة</div>
+          </div>
+          <div class="tile">
+            <div class="t-label">معلمات في كشف التطوير المهني خارج المدرسة</div>
+            <div class="t-value num">23 <small>معلمة</small></div>
+            <div class="t-cap">بيانات موثقة بالاسم والبرنامج والتاريخ وعدد الساعات، ومعتمدة من مديرة المدرسة ضمن سجل التطوير المهني لعام ١٤٤٧هـ</div>
+          </div>
+          <div class="tile">
+            <div class="t-label">الحاصلات على الرخصة المهنية</div>
+            <div class="t-value num">20 <small>من ٢٣ معلمة</small></div>
+            <div class="bar"><i style="width:87%"></i></div>
+            <div class="t-cap">بنسبة <b class="num">87٪</b> من معلمات الكشف</div>
+          </div>
+          <div class="tile">
+            <div class="t-label">تخصصات مجتمعات التعلم المهنية</div>
+            <div class="t-value num">7 <small>تخصصات</small></div>
+            <div class="t-cap">جلسات وزيارات تبادلية بين المعلمات باستمارات وتقارير معتمدة</div>
+          </div>
+        </div>
+        <div class="two-col" style="margin-top:20px">
+          <div>
+            <div class="sub-h">ورشة نفذتها الموظفة</div>
+            <p style="font-size:14.5px;line-height:1.85;margin:0"><b>إثراء التجربة الرقمية</b> (بحث إجرائي) — ورشة عمل نُفذت بتاريخ <span class="num">1447/8/4</span> في غرفة المعلمات واستهدفت معلمات المدرسة. تناولت التعريف بمفهوم الذكاء الاصطناعي في التعليم وتوظيف أدواته في إثراء التجربة الرقمية، وتنمية مهارات المعلمات في استخدام المنصات الرقمية الحديثة لطالباتهن.</p>
+          </div>
+          <div>
+            <div class="sub-h">برامج داخل المدرسة ومجتمعات التعلم</div>
+            <p style="font-size:14.5px;line-height:1.85;margin:0 0 8px">نُفذت البرامج الأربعة في غرفة المعلمات واستهدفت معلمات المدرسة، باستمارات تقييم عامة وتقارير تنفيذ معتمدة من مديرة المدرسة. ومن أهدافها: تفعيل التعليم الإلكتروني وفتح حسابات المعلمات في بوابة المستقبل، والتعرف على استراتيجيات التدريس والتعلم النشط وتصميم دروس تفاعلية، وتحقيق الانضباط داخل الصف والأهداف التعليمية بفاعلية.</p>
+            <p style="font-size:14.5px;line-height:1.85;margin:0">وُثقت جلسات مجتمعات التعلم المهنية لسبعة تخصصات — الدراسات الإسلامية، اللغة العربية، الدراسات الاجتماعية، الرياضيات، العلوم، اللغة الإنجليزية، الحاسب الآلي، التربية الفنية والأسرية — وزيارات تبادلية بين المعلمات بتاريخ <span class="num">1447/3/17</span> – <span class="num">1447/3/18</span> تناولت تصنيف مهارات التعلم ودمجها في التدريس وتبادل الخبرات وتطوير الممارسات التدريسية.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Bio & summary ===== -->
+      <section class="card" id="sec-bio" aria-label="قسم السيرة الذاتية وملخص الأرقام">
+        <h2>السيرة الذاتية وملخص الأرقام <span class="tag">خاتمة الملف</span></h2>
+        <div class="bio-grid">
+          <div class="bio-item"><div class="b-l">الاسم</div><div class="b-v">هياء راشد محمد العرفج</div></div>
+          <div class="bio-item"><div class="b-l">المسمى الوظيفي</div><div class="b-v">مساعد إداري متقدم</div></div>
+          <div class="bio-item"><div class="b-l">المرتبة</div><div class="b-v">الثامنة</div></div>
+          <div class="bio-item"><div class="b-l">المؤهل</div><div class="b-v">بكالوريوس اقتصاد منزلي</div></div>
+          <div class="bio-item"><div class="b-l">جهة العمل</div><div class="b-v">المتوسطة الخامسة بالدلم — إدارة التعليم بمنطقة الرياض</div></div>
+          <div class="bio-item"><div class="b-l">مكتب التعليم</div><div class="b-v">محافظة الخرج</div></div>
+          <div class="bio-item"><div class="b-l">مدة الخدمة</div><div class="b-v"><span class="num">24</span> سنة</div></div>
+          <div class="bio-item"><div class="b-l">الرئيس المباشر / مديرة المدرسة</div><div class="b-v">نورة عبدالله الجدوع</div></div>
+          <div class="bio-item"><div class="b-l">أعمال سابقة</div><div class="b-v">مصادر التعلم · أرشيف المدرسة · الميزانية التشغيلية · مراقبة الطالبات · الوارد · الصادر</div></div>
+        </div>
+        <div class="sub-h" style="margin-top:22px">ملخص الأرقام الموثقة في الملف</div>
+        <div class="tiles">
+          <div class="tile"><div class="t-label">مدة الخدمة</div><div class="t-value num">24 <small>سنة</small></div></div>
+          <div class="tile"><div class="t-label">تقارير الإشراف اليومي</div><div class="t-value num">4 <small>تقارير</small></div></div>
+          <div class="tile"><div class="t-label">إنجازات ٢٠٢٦م / أرشيف ٢٠٢٥م</div><div class="t-value num">16 <small>/</small> 15</div></div>
+          <div class="tile"><div class="t-label">مبادرات ١٤٤٧هـ</div><div class="t-value num">3 <small>مبادرات</small></div></div>
+          <div class="tile"><div class="t-label">ساعات تطوع موثقة</div><div class="t-value num">36 <small>ساعة</small></div><div class="t-cap">+ سنة كاملة بمدرسة أم جميل لتحفيظ القرآن الكريم · ٤ فرص</div></div>
+          <div class="tile"><div class="t-label">دورات تدريبية</div><div class="t-value num">45 <small>دورة</small></div><div class="t-cap">٤٥ يوماً تدريبياً موثقاً</div></div>
+          <div class="tile"><div class="t-label">أهداف الميثاق الجديد الموثقة بالشواهد</div><div class="t-value num">5 <small>أهداف</small></div></div>
+          <div class="tile"><div class="t-label">الرخصة المهنية بالمدرسة</div><div class="t-value num">20 <small>من ٢٣ معلمة</small></div></div>
+        </div>
+      </section>
+
+      <footer class="site">
+        <div class="f-name">ملف إنجاز الأداء الوظيفي لعام ٢٠٢٦م</div>
+        <div>هياء راشد محمد العرفج · مساعد إداري متقدم · المتوسطة الخامسة بالدلم · إدارة التعليم بمنطقة الرياض</div>
+        <div>جميع الأرقام والبيانات في هذه الصفحة موثقة من ملف الإنجاز لعام ٢٠٢٦م وشواهده.</div>
+      </footer>
+
+    </div>
+
+    <script>
+    "use strict";
+    /* ================= Data (from the 2026 achievement file) ================= */
+    var GOALS = [
+      { n:1, short:"بيانات الاطلاع", title:"الهدف الأول · بيانات الاطلاع على التعاميم", unit:"بيان", target:9, done:12, weight:20,
+        text:"إعداد (٩) بيان بإطلاع منسوبات المدرسة على التعاميم بمعدل بيان واحد شهرياً خلال العام الحالي ٢٠٢٦م إلكترونياً، مع تفعيل آلية الاطلاع على التعاميم شهرياً.",
+        extra:"المنجز الفعلي ١٢ بياناً معتمداً — شواهده مرفقة في قسم بيانات الاطلاع أدناه." },
+      { n:2, short:"ملف التوثيق", title:"الهدف الثاني · ملف توثيق التعاميم", unit:"ملف", target:1, done:2, weight:20,
+        text:"إعداد (١) ملف لتوثيق التعاميم الواردة مع تصنيفها وتحديثها خلال العام الحالي ٢٠٢٦م.",
+        extra:"يشمل الملف سجل الوارد والمذكرات الداخلية مع تصنيف محتوياته، وشواهده محفوظة ضمن ملفات المدرسة." },
+      { n:3, short:"المكافآت والانتدابات", title:"الهدف الثالث · ملف المكافآت والانتدابات", unit:"ملف", target:1, done:1, weight:25,
+        text:"إعداد وتنظيم (١) ملف خاص بالمكافآت والانتدابات حسب الدليل الإجرائي، متضمناً: أدلة إرشادية، استمارات، تعاميم، نماذج، وثائق، بداية العام الدراسي الحالي ٢٠٢٦م.",
+        extra:"اكتمل المنجز مطابقاً للمستهدف تماماً، وشواهده محفوظة ضمن ملفات المدرسة." },
+      { n:4, short:"تقارير المطابقة", title:"الهدف الرابع · تقارير مطابقة الشهادات", unit:"تقرير", target:2, done:9, weight:15,
+        text:"إعداد (٢) تقرير لمطابقة شهادات برامج التطوير المهني لشاغلي الوظائف التعليمية في كل فصل دراسي، بواقع تقرير لكل فصل، واستكمال إجراءاتها خلال العام الحالي ٢٠٢٦م.",
+        extra:"المنجز الفعلي ٩ تقارير مع استكمال الإجراءات، وشواهده محفوظة ضمن ملفات المدرسة." },
+      { n:5, short:"سجل التطوير المهني", title:"الهدف الخامس · سجل التطوير المهني", unit:"سجل", target:1, done:2, weight:20,
+        text:"إعداد (١) سجل للتطوير المهني لشاغلي الوظائف التعليمية والإدارية خلال العام الدراسي والحالي ٢٠٢٦م.",
+        extra:"المنجز الفعلي سجلان (٢)، وشواهده محفوظة ضمن ملفات المدرسة." }
+    ];
+
+    var COMPETENCIES = [
+      { name:"المسؤولية", w:20, desc:"يلتزم بوعوده وتعهداته لرئيسه وزملائه في العمل لضمان سلامة إنجاز الفريق كافة، ويسعى إلى تنفيذ مسؤولياته ومهامه في مواجهة العقبات، ويضع أهدافاً لنفسه ويتابع تحقيقها بما يخدم مصلحة العمل." },
+      { name:"العمل الجماعي", w:25, desc:"لديه القدرة على التواصل والتعاون وبناء علاقات فعالة مع أعضاء فريق العمل، ويسعى إلى التغلب على التحديات والعقبات التي تعترض فريق العمل، ويشارك المعارف والمعلومات ذات العلاقة بمجال العمل مع الآخرين، ويسهم في تطوير قاعدة بيانات ومعلومات لفريق العمل أو الوحدة التنظيمية." },
+      { name:"المرونة للتغيير", w:30, desc:"يُظهر إدراكاً لدوره ضمن فريق العمل والفائدة العائدة على أهداف الفريق من تأديته لهذا الدور، ويتقبل الأفكار والمقترحات الجديدة ويطبقها بإيجابية، ويُظهر رغبة في فهمها وتحليلها، ويجعل الأفكار والمقترحات الجديدة وسيلة للتطوير." },
+      { name:"المبادرة", w:25, desc:"يُظهر القدرة على العمل باستقلالية والرغبة في أداء المهام الموكلة إليه دون متابعة مباشرة من المدير، ويبادر بطرح بعض الأفكار التي تسهم في إنجاز مهام العمل الخاصة به بشكل فعال، ويتطوع في بعض الأحيان لمساعدة أعضاء الفريق بإنجاز مهام العمل المشتركة والانتهاء منها في الوقت المطلوب." }
+    ];
+
+    var COURSES = [
+      "برنامج جداول البيانات Excel",
+      "إنترنت الأشياء والفرص الواعدة",
+      "المهارات الرقمية في بيئة العمل",
+      "إدارة المخاطر المتقدمة",
+      "إدارة السياحة",
+      "تطوير تطبيقات الويب",
+      "الممارسات الحديثة في إدارة الموارد البشرية",
+      "التفاؤل بإيجابية — سلسلة السكرتارية التقنية",
+      "استمرارية الأعمال والتعافي من الأزمات",
+      "الأساسيات المهنية",
+      "استخدام الذكاء الاصطناعي في إدارة الموارد البشرية",
+      "الأمن السيبراني",
+      "تطوير خدمات المستفيدين",
+      "أساسيات الحوكمة الإلكترونية وسلسلة الإمداد",
+      "العقلية الريادية وإدارة الأزمات",
+      "المهارات الأساسية لإتقان فن التعامل مع العملاء",
+      "اجتياز المقابلة الوظيفية بنجاح",
+      "مهارات بناء فرق العمل",
+      "مكونات الإبداع في بيئة العمل",
+      "الإشراف الإداري",
+      "إدارة المعلومات الشخصية (Outlook)",
+      "مهارات السكرتارية الإبداعية",
+      "إعداد المدربين",
+      "الاتصال الفعال في العمل",
+      "قواعد السلوك الوظيفي وأخلاقيات العمل",
+      "مهارات التعامل مع المستفيدين",
+      "مهارات التعامل مع ضغوط العمل",
+      "إجراءات التقاضي أمام ديوان المظالم",
+      "حل المشكلات واتخاذ القرارات",
+      "الاستثمار الاجتماعي",
+      "تحليل احتياجات العملاء في التصميم الجرافيكي",
+      "إعداد العروض الفنية والمالية",
+      "العناصر الرئيسية لنجاح ريادة الأعمال",
+      "ثقافة العمل عن بعد",
+      "التسويق الإلكتروني بأقل التكاليف",
+      "التميز في خدمة العملاء",
+      "المقابلة الشخصية الاحترافية",
+      "مهارات التعامل مع السائح",
+      "التوعية بمخاطر الأمن السيبراني",
+      "إدارة المشتريات وأصحاب المصلحة للمشروع",
+      "قياس الأثر والتنمية",
+      "التحولات المستقبلية في الخدمات اللوجستية والبحرية",
+      "التقنيات الحديثة وأثرها على وظائف المستقبل",
+      "بيئة العمل",
+      "التفكير التصميمي"
+    ];
+
+    var ACH_2026 = [
+      { t:"مساعدة المراقبة في التواصل مع أولياء الأمور بسبب الغياب", d:"١٤٤٨هـ" },
+      { t:"جولة تفتيشية على الصف الثالث", d:"١٤٤٨هـ" },
+      { t:"تعبئة جدول الحصص", d:"١٤٤٨هـ" },
+      { t:"توقيع المعلمات على حصص الانتظار", d:"١٤٤٨هـ" },
+      { t:"المساعدة في ترتيب غرفة المصادر", d:"١٤٤٨هـ" },
+      { t:"المساعدة في ترتيب ملفات الصف الثالث وتحويلها للثانوي", d:"١٤٤٧هـ" },
+      { t:"المشاركة في تنظيم وتقسيم ملفات الصف الأول المتوسط", d:"1447/3/9" },
+      { t:"أخذ غياب الطالبات", d:"1447/3/5" },
+      { t:"أخذ غياب الطالبات", d:"1447/3/3" },
+      { t:"ترتيب وتنظيم ملفات الإدارة", d:"1447/4/2" },
+      { t:"أخذ غياب الطالبات", d:"1447/4/17" },
+      { t:"الملاحظة على الصف الثالث — اختبار شهري (١)", d:"1447/4/28" },
+      { t:"الملاحظة على الصف الأول — اختبار شهري (١)", d:"1447/4/29" },
+      { t:"مساعدة المعلمات في تصوير أوراق الاختبارات", d:"١٤٤٧هـ" },
+      { t:"دخول احتياط الصف الثاني بدل معلمة الحصة (البسام) — حصتان", d:"١٤٤٧هـ" },
+      { t:"التفتيش على الصف الأول (أولى أول)", d:"1447/5/7" }
+    ];
+
+    var ACH_2025 = [
+      { t:"طباعة غياب الطالبات نهاية الشهر للزميلة الإدارية", d:"١٤٤٦هـ" },
+      { t:"أخذ غياب الطالبات للفصل الثالث", d:"١٤٤٦هـ" },
+      { t:"التفتيش على الجوال آخر الدوام للفصل الثالث", d:"١٤٤٦هـ" },
+      { t:"مساعدة الإدارية في كتابة جدول المناوبة على الجهاز", d:"١٤٤٦هـ" },
+      { t:"تفتيش على الصف الثالث يوم الثلاثاء", d:"1446/7/28" },
+      { t:"تفتيش على الصف الثالث", d:"1446/8/6" },
+      { t:"المشاركة في حفل التأسيس بمبلغ مالي", d:"١٤٤٦هـ" },
+      { t:"المشاركة في حفل التربية الفكرية", d:"١٤٤٦هـ" },
+      { t:"المشاركة بمبلغ لطالبات التربية الفكرية (سُلّم للأخصائية)", d:"1446/10/22" },
+      { t:"توزيع الكتب على طالبات الترم الثالث", d:"1446/8/20" },
+      { t:"ترحيل ملف طالبة", d:"1446/9/10" },
+      { t:"المشاركة في تنظيم اختبار نافس", d:"1446/10/17" },
+      { t:"شراء هدايا النجاح لمدرسة الفكري", d:"١٤٤٦هـ" },
+      { t:"أخذ غياب الصف الثاني بدل الإدارية ابتسام الخنين يوم الأحد", d:"1446/11/27" },
+      { t:"المساعدة في ترتيب ملفات الصف الثالث القديمة نهاية السنة وتسليمها للطالبات وترحيل ملفاتهن للثانوي", d:"١٤٤٦هـ" }
+    ];
+
+    var VOLUNTEER = [
+      { label:"مركز التأهيل الشامل — الدرعية", v:25, display:"25 ساعة", sub:"تنظيم صالة الأنشطة" },
+      { label:"الدفاع المدني", v:8, display:"8 ساعات", sub:"التوعية بمخاطر السيول" },
+      { label:"وزارة البيئة والمياه والزراعة", v:3, display:"3 ساعات", sub:"تشجير المدرسة" }
+    ];
+
+    var REPORTS = [
+      { title:"تقرير (١) · إشراف يومي خلال أيام الدراسة",
+        when:"خلال الأيام الدراسية", place:"ساحات المدرسة", by:"الإداريات حسب التكليف الصادر من إدارة المدرسة",
+        steps:["متابعة الطالبات أثناء وقت الفسحة وبين الحصص الدراسية","حث الطالبات على المحافظة على نظافة المكان والحرص على ممتلكات المدرسة","الإشراف على الطالبات أثناء الشراء من المقصف","عمل جولة إشرافية بين الحصص الدراسية لضبط انتظام الطالبات"] },
+      { title:"تقرير (٢) · إشراف يومي خلال شهر رمضان المبارك",
+        when:"خلال شهر رمضان المبارك", place:"ساحات المدرسة الداخلية والخارجية", by:"الإداريات حسب تقسيم الجدول الإشرافي والمناوبة المعد من قبل الإدارة",
+        steps:["الإشراف على الطالبات وحثهن على الصلاة","متابعة الطالبات أثناء وقت الفسحة وبين الحصص الدراسية","حث الطالبات على المحافظة على نظافة المكان والحرص على ممتلكات المدرسة"] },
+      { title:"تقرير (٣) · إشراف يومي خلال أيام الاختبارات",
+        when:"خلال أيام الاختبارات نهاية كل فصل دراسي وأثناء الحالات الطارئة", place:"ساحات المدرسة والفصول الدراسية", by:"الإداريات حسب تقسيم الجدول الإشرافي والمناوبة المعد من قبل الإدارة",
+        steps:["عمل جولات تفتيشية على الطالبات — أثناء تواجدهن بالفصل أو بالجولات في الخارج","مصادرة الجوالات إن وجدت","أخذ المخالفات الموجودة مع الطالبات (أكل ممنوع — صبغ الألوان — غيرها)","تسجيل اسم الطالبة المخالفة وتسليمه للوكيلة المسؤولة عن شؤون الطالبات لاستكمال الإجراءات اللازمة"] },
+      { title:"تقرير (٤) · إشراف ومناوبة الأسبوع",
+        when:"الإشراف ومناوبة الأسبوع في كل فصل دراسي", place:"الوقوف عند باب المدرسة الرئيسي — ساحات المدرسة وممرات الفصول ودورات المياه", by:"الإداريات حسب تقسيم جدول المناوبة",
+        steps:["عمل جولة إشرافية على الفصول ودورات المياه نهاية الدوام","إنزال الطالبات للساحة الخارجية","الإشراف على الطالبات أثناء تواصلهن مع أولياء أمورهن","الوقوف عند باب المدرسة الخارجي ومتابعة الطالبات أثناء خروجهن"] }
+    ];
+
+    var CIRCULARS = [
+      { t:"المشاركة في جائزة التعليم الخليجي — البحوث الإجرائية", to:"اطّلع عليه جميع المعلمات — للإحاطة وإكمال اللازم" },
+      { t:"استمارة الترشيح لمدارس التعليم (معلم – مدير – وكيل)", to:"اطّلع عليه جميع المعلمات — للإحاطة وإكمال اللازم" },
+      { t:"طلبات التسليم من المتسابقات وضوابط العام الدراسي", to:"اطّلع عليه جميع المعلمات — للإحاطة وإكمال اللازم" },
+      { t:"الترشيح للعمل في مدارس التعليم المستمر — للعام القادم ١٤٤٨هـ", to:"اطّلع عليه منسوبات المدرسة" },
+      { t:"نشر ثقافة الاختبارات", to:"اطّلع عليه جميع المعلمات (وفق ملاحظات البيان)" },
+      { t:"اشتراك منسوبي المدرسة في برامج العمل التطوعي", to:"اطّلع عليه منسوبات المدرسة" },
+      { t:"دليل المنسق الإعلامي بالمدرسة", to:"اطّلع عليه جميع المعلمات والإداريات والوكيلة — للإحاطة وإكمال اللازم" },
+      { t:"التعليم المستمر", to:"اطّلع عليه جميع المعلمات" },
+      { t:"سياسات متابعة دوام الموظفين", to:"اطّلع عليه جميع المعلمات والإداريات" },
+      { t:"التسجيل في البرامج التدريبية", to:"اطّلع عليه جميع معلمات التربية الخاصة والتعليم العام (وفق ملاحظات البيان)" },
+      { t:"الالتزام بما ورد في دليل توزيع درجات المواد الدراسية — ٢٠٢٥م", to:"اطّلع عليه جميع معلمات التعليم العام (وفق ملاحظات البيان)" },
+      { t:"بداية احتساب دقائق التأخر الصباحي ووقت الانصراف", to:"اطّلع عليه منسوبات المدرسة" }
+    ];
+
+    /* ================= Helpers ================= */
+    function fmt(n){ return n.toLocaleString("en-US"); }
+    function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+    function styleVar(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+    function pct(done, target){ return Math.round((done / target) * 100); }
+
+    /* Horizontal bars (HTML). items: [{label, value, display, sub, key, clickable}] */
+    function hBars(el, items, opts){
+      opts = opts || {};
+      var max = Math.max.apply(null, items.map(function(d){ return d.value; }));
+      var html = "";
+      items.forEach(function(d){
+        var w = max > 0 ? (d.value / max) * 100 : 0;
+        var cls = "hbar";
+        if (opts.highlightKey !== null && opts.highlightKey !== undefined){
+          cls += (d.key === opts.highlightKey) ? " sel" : " dim";
+        }
+        var tag = d.clickable ? "button" : "div";
+        html += "<" + tag + ' class="' + cls + '" data-key="' + d.key + '"' + (d.clickable ? ' type="button"' : "") + ">" +
+          '<span class="h-label">' + esc(d.label) + "</span>" +
+          '<span class="h-track"><span class="h-fill" style="width:' + w.toFixed(1) + '%"></span></span>' +
+          '<span class="h-val num">' + esc(d.display) + (d.sub ? "<small>" + esc(d.sub) + "</small>" : "") + "</span>" +
+          "</" + tag + ">";
+      });
+      el.innerHTML = html;
+      if (opts.onPick){
+        var rows = el.querySelectorAll(".hbar[data-key]");
+        Array.prototype.forEach.call(rows, function(r){
+          r.addEventListener("click", function(){ opts.onPick(parseInt(r.getAttribute("data-key"), 10)); });
+        });
+      }
+    }
+
+    /* ================= KPI: scroll + counters ================= */
+    Array.prototype.forEach.call(document.querySelectorAll(".kpi[data-goto]"), function(btn){
+      btn.addEventListener("click", function(){
+        var t = document.getElementById(btn.getAttribute("data-goto"));
+        if (t) t.scrollIntoView({ behavior:"smooth", block:"start" });
+      });
+    });
+    (function(){
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var spans = document.querySelectorAll("[data-count]");
+      if (reduce || !("requestAnimationFrame" in window)) return;
+      Array.prototype.forEach.call(spans, function(sp){
+        var end = parseInt(sp.getAttribute("data-count"), 10), start = null;
+        function step(ts){
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / 900, 1);
+          sp.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(step); else sp.textContent = end;
+        }
+        requestAnimationFrame(step);
+      });
+    })();
+
+    /* ================= Goals chart (grouped bars) ================= */
+    var selGoal = 0;
+
+    function renderGoalChart(){
+      var el = document.getElementById("chGoals");
+      var W = 760, H = 318, padTop = 40, padBottom = 58, padX = 14;
+      var plotH = H - padTop - padBottom;
+      var max = 12;
+      var slot = (W - padX * 2) / GOALS.length;
+      var barW = Math.min(34, slot * 0.26), gap = 6;
+      var cTarget = styleVar("--gold"), cDone = styleVar("--sage"), cHi = styleVar("--sage-dark");
+      var cInk = styleVar("--ink"), cMuted = styleVar("--muted"), cLine = styleVar("--line");
+      var s = '<svg viewBox="0 0 ' + W + " " + H + '" role="presentation">';
+      [0.25, 0.5, 0.75, 1].forEach(function(f){
+        var y = padTop + plotH * (1 - f);
+        s += '<line x1="' + padX + '" y1="' + y + '" x2="' + (W - padX) + '" y2="' + y + '" stroke="' + cLine + '" stroke-width="1"/>';
+      });
+      s += '<line x1="' + padX + '" y1="' + (padTop + plotH) + '" x2="' + (W - padX) + '" y2="' + (padTop + plotH) + '" stroke="' + cMuted + '" stroke-width="1.2"/>';
+      GOALS.forEach(function(g, i){
+        var cx = W - padX - slot * (i + 0.5);
+        var isHi = (i === selGoal);
+        var dim = !isHi;
+        /* RTL: target bar on the right of the pair, done on the left */
+        var pairs = [
+          { v:g.target, x: cx + gap / 2, fill: cTarget },
+          { v:g.done, x: cx - gap / 2 - barW, fill: isHi ? cHi : cDone }
+        ];
+        pairs.forEach(function(b){
+          var h = (b.v / max) * plotH;
+          var y = padTop + plotH - h;
+          s += '<rect class="bar-rect" data-goal="' + i + '" x="' + b.x + '" y="' + y + '" width="' + barW + '" height="' + Math.max(h, 3) + '" rx="5" fill="' + b.fill + '" fill-opacity="' + (dim ? 0.45 : 1) + '"><title>' + esc(g.title) + "</title></rect>";
+          s += '<text x="' + (b.x + barW / 2) + '" y="' + (y - 8) + '" text-anchor="middle" font-size="' + (isHi ? 16 : 14) + '" font-weight="700" fill="' + cInk + '" fill-opacity="' + (dim ? 0.55 : 1) + '">' + fmt(b.v) + "</text>";
+        });
+        var sp = g.short.lastIndexOf(" ");
+        var l1 = sp > 0 ? g.short.slice(0, sp) : g.short;
+        var l2 = sp > 0 ? g.short.slice(sp + 1) : "";
+        s += '<text x="' + cx + '" y="' + (padTop + plotH + 22) + '" text-anchor="middle" font-size="13" font-weight="' + (isHi ? 700 : 500) + '" fill="' + (isHi ? cInk : cMuted) + '">' + esc(l1) + "</text>";
+        if (l2) s += '<text x="' + cx + '" y="' + (padTop + plotH + 41) + '" text-anchor="middle" font-size="12" font-weight="' + (isHi ? 700 : 500) + '" fill="' + (isHi ? cInk : cMuted) + '">' + esc(l2) + "</text>";
+        s += '<text x="' + cx + '" y="' + (padTop + plotH + 56) + '" text-anchor="middle" font-size="11.5" fill="' + cMuted + '">الهدف ' + ["الأول","الثاني","الثالث","الرابع","الخامس"][i] + "</text>";
+      });
+      s += "</svg>";
+      el.innerHTML = s;
+      Array.prototype.forEach.call(el.querySelectorAll(".bar-rect"), function(r){
+        r.addEventListener("click", function(){ pickGoal(parseInt(r.getAttribute("data-goal"), 10)); });
+      });
+    }
+
+    function renderGoalChips(){
+      var el = document.getElementById("goalChips");
+      el.innerHTML = "";
+      GOALS.forEach(function(g, i){
+        var b = document.createElement("button");
+        b.type = "button"; b.className = "chip";
+        b.textContent = g.title.split("·")[0].trim() + " — " + g.short;
+        b.setAttribute("aria-pressed", i === selGoal ? "true" : "false");
+        b.addEventListener("click", function(){ pickGoal(i); });
+        el.appendChild(b);
+      });
+    }
+
+    function renderGoalDetail(){
+      var g = GOALS[selGoal];
+      var p = pct(g.done, g.target);
+      var status = g.done > g.target ? "تم تجاوز المستهدف" : "تحقق المستهدف بالكامل";
+      document.getElementById("goalDetail").innerHTML =
+        "<h3>" + esc(g.title) + "</h3>" +
+        '<div class="gd-meta">' +
+          "<span>معيار القياس: <b>" + esc(g.unit) + "</b></span>" +
+          "<span>الوزن النسبي: <b class=\"num\">" + g.weight + "٪</b></span>" +
+          "<span>المستهدف: <b class=\"num\">" + fmt(g.target) + "</b></span>" +
+          "<span>المنجز الموثق: <b class=\"num\">" + fmt(g.done) + "</b></span>" +
+          "<span>نسبة الإنجاز: <b class=\"num\">" + fmt(p) + "٪</b></span>" +
+          '<span class="status-chip" style="margin-top:0">' + status + "</span>" +
+        "</div>" +
+        "<p><b>نص الهدف في الميثاق:</b> " + esc(g.text) + "</p>" +
+        "<p>" + esc(g.extra) + "</p>" +
+        '<div class="bar" role="img" aria-label="شريط نسبة الإنجاز ' + p + ' بالمئة"><i style="width:' + Math.min(p, 100) + '%"></i></div>';
+    }
+
+    function pickGoal(i){
+      selGoal = i;
+      renderGoalChart(); renderGoalChips(); renderGoalDetail();
+    }
+
+    /* ================= Goal weights donut ================= */
+    (function(){
+      var colors = ["--sage", "--gold", "--sage-dark", "--clay", "--sage-mid"];
+      var cx = 80, cy = 80, r = 62, sw = 26, C = 2 * Math.PI * r;
+      var acc = 0, s = '<svg viewBox="0 0 160 160" width="150" height="150" role="presentation">';
+      GOALS.forEach(function(g, i){
+        var frac = g.weight / 100;
+        var col = styleVar(colors[i]);
+        s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="' + col + '" stroke-width="' + sw + '" stroke-dasharray="' + (frac * C - 3) + " " + C + '" stroke-dashoffset="' + (-acc * C) + '" transform="rotate(-90 ' + cx + " " + cy + ')"/>';
+        acc += frac;
+      });
+      s += '<text x="' + cx + '" y="' + (cy - 4) + '" text-anchor="middle" font-size="21" font-weight="700" fill="' + styleVar("--ink") + '">100٪</text>';
+      s += '<text x="' + cx + '" y="' + (cy + 18) + '" text-anchor="middle" font-size="11.5" fill="' + styleVar("--muted") + '">مجموع الأوزان</text>';
+      s += "</svg>";
+      document.getElementById("chGoalWeights").innerHTML = s;
+      var lg = "";
+      GOALS.forEach(function(g, i){
+        lg += '<span class="li"><span class="dot" style="background:' + styleVar(colors[i]) + '"></span>' + esc(g.title.split("·")[0].trim()) + " · " + esc(g.short) + ' <b class="num">' + g.weight + '٪</b></span>';
+      });
+      document.getElementById("goalWeightsLegend").innerHTML = lg;
+    })();
+
+    /* ================= Competencies ================= */
+    var selComp = -1;
+    function renderComp(){
+      hBars(document.getElementById("compBars"),
+        COMPETENCIES.map(function(c, i){ return { label:c.name, value:c.w, display:c.w + "٪", key:i, clickable:true }; }),
+        { highlightKey: selComp < 0 ? null : selComp, onPick: function(i){
+            selComp = (selComp === i) ? -1 : i;
+            renderComp();
+            document.getElementById("compDesc").innerHTML = selComp < 0
+              ? "اختر كفاءة لعرض وصفها السلوكي من الميثاق المعتمد."
+              : "<b>" + esc(COMPETENCIES[selComp].name) + " (" + COMPETENCIES[selComp].w + "٪):</b> " + esc(COMPETENCIES[selComp].desc);
+          } });
+    }
+
+    /* ================= Courses ================= */
+    function renderCourses(filter){
+      var list = document.getElementById("courseList");
+      var q = (filter || "").trim();
+      var shown = 0, html = "";
+      COURSES.forEach(function(name, i){
+        if (q && name.indexOf(q) === -1) return;
+        shown++;
+        html += '<li><span class="no num">' + (i + 1) + "</span><span>" + esc(name) + "</span></li>";
+      });
+      list.innerHTML = html;
+      document.getElementById("courseEmpty").style.display = shown ? "none" : "block";
+      document.getElementById("courseCount").innerHTML = "عرض <b class=\"num\">" + fmt(shown) + "</b> من <b class=\"num\">45</b> دورة";
+    }
+    document.getElementById("courseSearch").addEventListener("input", function(e){ renderCourses(e.target.value); });
+    hBars(document.getElementById("courseYears"),
+      [ { label:"عام ١٤٤٥هـ", value:35, display:"35", sub:"دورة", key:0, clickable:false },
+        { label:"عام ١٤٤٠هـ", value:10, display:"10", sub:"دورات", key:1, clickable:false } ], {});
+
+    /* ================= Achievements ================= */
+    var achMode = "2026";
+    function renderAch(){
+      var data = achMode === "2026" ? ACH_2026 : achMode === "2025" ? ACH_2025 : ACH_2026.concat(ACH_2025);
+      var html = "";
+      data.forEach(function(a, i){
+        html += '<li><span class="no num">' + (i + 1) + '</span><span class="a-body">' + esc(a.t) + '</span><span class="a-date num">' + esc(a.d) + "</span></li>";
+      });
+      document.getElementById("achList").innerHTML = html;
+      Array.prototype.forEach.call(document.querySelectorAll("#achChips .chip"), function(c){
+        c.setAttribute("aria-pressed", c.getAttribute("data-ach") === achMode ? "true" : "false");
+      });
+    }
+    Array.prototype.forEach.call(document.querySelectorAll("#achChips .chip"), function(c){
+      c.addEventListener("click", function(){ achMode = c.getAttribute("data-ach"); renderAch(); });
+    });
+
+    /* ================= Volunteering ================= */
+    var selVol = -1;
+    function renderVol(){
+      hBars(document.getElementById("volBars"),
+        VOLUNTEER.map(function(v, i){ return { label:v.label, value:v.v, display:v.display, sub:v.sub, key:i, clickable:true }; }),
+        { highlightKey: selVol < 0 ? null : selVol, onPick: function(i){ selVol = (selVol === i) ? -1 : i; renderVol(); } });
+    }
+
+    /* ================= Supervision reports ================= */
+    (function(){
+      var html = "";
+      REPORTS.forEach(function(r, i){
+        html += '<div class="report' + (i === 0 ? " open" : "") + '">' +
+          '<button type="button" aria-expanded="' + (i === 0 ? "true" : "false") + '">' + esc(r.title) + '<span class="chev" aria-hidden="true">▾</span></button>' +
+          '<div class="r-body">' +
+            '<div class="r-meta"><b>التنفيذ:</b> ' + esc(r.when) + " · <b>المكان:</b> " + esc(r.place) + "<br><b>الهدف العام:</b> تعزيز الأسلوب التربوي ومتابعة ورعاية سلوك الطالبات · <b>المستفيدات:</b> الطالبات · <b>منفذو الإشراف:</b> " + esc(r.by) + "</div>" +
+            "<b>الإجراءات:</b><ul>" + r.steps.map(function(st){ return "<li>" + esc(st) + "</li>"; }).join("") + "</ul>" +
+          "</div></div>";
+      });
+      var list = document.getElementById("reportList");
+      list.innerHTML = html;
+      Array.prototype.forEach.call(list.querySelectorAll(".report > button"), function(btn){
+        btn.addEventListener("click", function(){
+          var rep = btn.parentNode, open = rep.classList.toggle("open");
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+      });
+    })();
+
+    /* ================= Circulars ================= */
+    (function(){
+      var html = "";
+      CIRCULARS.forEach(function(c, i){
+        html += '<li><span class="no num">' + (i + 1) + "</span><span>" + esc(c.t) + '<span class="who-to">' + esc(c.to) + "</span></span></li>";
+      });
+      document.getElementById("circList").innerHTML = html;
+    })();
+
+    /* ================= Init ================= */
+    renderGoalChart(); renderGoalChips(); renderGoalDetail();
+    renderComp();
+    renderCourses("");
+    renderAch();
+    renderVol();
+    </script>
+  </body>
+</html>
