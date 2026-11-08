@@ -3,4 +3,3 @@ Disallow: /lesson-unit3/
 Disallow: /lesson-unit6-living-things/
 Disallow: /lesson-g3-chores/
 Disallow: /lesson-lifestyles/
-Disallow: /anfal-landing/
