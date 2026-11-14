@@ -51,7 +51,7 @@ body {
 .bio .contact .row { margin-top: 4px; }
 .bio .contact .row:first-child { margin-top: 0; }
 .about { border-radius: 26px; padding: 22px; margin-top: 22px; animation: rise 0.55s 0.10s ease both; }
-.about h2 { font-family: 'Thmanyah Serif Display', serif; font-size: 20px; font-weight: 900; color: #2E352B; text-align: center; }
+.about h2 { font-family: 'Thmanyah Serif Display', serif; font-size: 18px; font-weight: 900; color: #2E352B; text-align: center; }
 .about p { font-size: 16px; margin-top: 10px; text-align: right; line-height: 1.8; }
 .sec { margin-top: 26px; }
 .sec-title { display: flex; align-items: center; gap: 14px; font-family: 'Thmanyah Serif Display', serif; font-size: 17px; font-weight: 700; color: #425939; text-align: center; margin-bottom: 14px; }
@@ -62,9 +62,10 @@ body {
 .vm p { font-size: 14px; margin-top: 6px; line-height: 1.7; }
 .values { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
 .value-pill { padding: 8px 18px; border-radius: 999px; border: 1.5px solid #75AC3D; background: rgba(255,255,255,0.60); font-weight: 700; font-size: 15px; color: #425939; }
+.value-pill::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #E07830; margin-left: 7px; vertical-align: middle; }
 .services { display: flex; flex-wrap: wrap; gap: 12px; }
 .svc { width: calc(50% - 6px); border-radius: 22px; padding: 18px 16px; text-align: center; }
-.svc .pill { display: inline-block; background: #F2C500; color: #2E352B; font-weight: 700; font-size: 14.5px; padding: 5px 18px; border-radius: 999px; }
+.svc .pill { display: inline-block; background: #E07830; color: #fff; font-weight: 700; font-size: 13.5px; padding: 5px 14px; border-radius: 999px; white-space: nowrap; }
 .svc p { font-size: 14px; margin-top: 10px; line-height: 1.7; }
 .adv-list { display: flex; flex-direction: column; gap: 10px; }
 .adv { display: flex; align-items: center; gap: 12px; border-radius: 18px; padding: 13px 16px; font-size: 15.5px; font-weight: 500; text-align: right; }
@@ -80,18 +81,16 @@ body {
 .faq-item { border-radius: 18px; padding: 14px 18px; }
 .faq-item summary { font-weight: 700; font-size: 16px; color: #2E352B; cursor: pointer; list-style: none; }
 .faq-item summary::-webkit-details-marker { display: none; }
-.faq-item summary::after { content: "+"; float: left; color: #75AC3D; font-size: 20px; line-height: 1.4; }
+.faq-item summary::after { content: "+"; float: left; color: #E07830; font-size: 20px; line-height: 1.4; }
 .faq-item[open ] summary::after { content: "−"; }
 .faq-item p { font-size: 15px; margin-top: 8px; line-height: 1.7; }
 .faq-more { text-align: center; font-size: 14.5px; margin-top: 14px; }
 .faq-more a { color: #477537; font-weight: 700; text-decoration: none; }
 .chip-orange { background: #E07830; }
 .offers-strip { border-radius: 22px; padding: 18px 20px; margin-top: 22px; text-align: center; animation: rise 0.55s 0.30s ease both; }
-.offers-strip b { font-family: 'Thmanyah Serif Display', serif; font-size: 18px; font-weight: 900; color: #425939; }
+.offers-strip b { font-family: 'Thmanyah Serif Display', serif; font-size: 18px; font-weight: 900; color: #E07830; }
 .offers-strip p { font-size: 14.5px; margin-top: 4px; }
 .links { margin-top: 26px; }
-.links h2 { display: flex; align-items: center; gap: 14px; font-family: 'Thmanyah Serif Display', serif; font-size: 17px; font-weight: 700; color: #425939; text-align: center; margin-bottom: 14px; animation: rise 0.55s 0.14s ease both; }
-.links h2::before, .links h2::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(71,117,55,0), rgba(71,117,55,0.55), rgba(71,117,55,0)); }
 .btn {
   display: flex; align-items: center; gap: 14px; width: 100%;
   padding: 15px 18px; margin-bottom: 11px; border-radius: 22px;
@@ -268,15 +267,15 @@ body {
   </div>
 
   <div class="links">
-    <h2>روابطنا</h2>
+    <h2 class="sec-title">روابطنا</h2>
     <a class="btn glass" href="https://wa.me/966500701817">
       <span class="chip chip-whatsapp"><img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjRkZGRkZGIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+V2hhdHNBcHA8L3RpdGxlPjxwYXRoIGQ9Ik0xNy40NzIgMTQuMzgyYy0uMjk3LS4xNDktMS43NTgtLjg2Ny0yLjAzLS45NjctLjI3My0uMDk5LS40NzEtLjE0OC0uNjcuMTUtLjE5Ny4yOTctLjc2Ny45NjYtLjk0IDEuMTY0LS4xNzMuMTk5LS4zNDcuMjIzLS42NDQuMDc1LS4yOTctLjE1LTEuMjU1LS40NjMtMi4zOS0xLjQ3NS0uODgzLS43ODgtMS40OC0xLjc2MS0xLjY1My0yLjA1OS0uMTczLS4yOTctLjAxOC0uNDU4LjEzLS42MDYuMTM0LS4xMzMuMjk4LS4zNDcuNDQ2LS41Mi4xNDktLjE3NC4xOTgtLjI5OC4yOTgtLjQ5Ny4wOTktLjE5OC4wNS0uMzcxLS4wMjUtLjUyLS4wNzUtLjE0OS0uNjY5LTEuNjEyLS45MTYtMi4yMDctLjI0Mi0uNTc5LS40ODctLjUtLjY2OS0uNTEtLjE3My0uMDA4LS4zNzEtLjAxLS41Ny0uMDEtLjE5OCAwLS41Mi4wNzQtLjc5Mi4zNzItLjI3Mi4yOTctMS4wNCAxLjAxNi0xLjA0IDIuNDc5IDAgMS40NjIgMS4wNjUgMi44NzUgMS4yMTMgMy4wNzQuMTQ5LjE5OCAyLjA5NiAzLjIgNS4wNzcgNC40ODcuNzA5LjMwNiAxLjI2Mi40ODkgMS42OTQuNjI1LjcxMi4yMjcgMS4zNi4xOTUgMS44NzEuMTE4LjU3MS0uMDg1IDEuNzU4LS43MTkgMi4wMDYtMS40MTMuMjQ4LS42OTQuMjQ4LTEuMjg5LjE3My0xLjQxMy0uMDc0LS4xMjQtLjI3Mi0uMTk4LS41Ny0uMzQ3bS01LjQyMSA3LjQwM2gtLjAwNGE5Ljg3IDkuODcgMCAwMS01LjAzMS0xLjM3OGwtLjM2MS0uMjE0LTMuNzQxLjk4Mi45OTgtMy42NDgtLjIzNS0uMzc0YTkuODYgOS44NiAwIDAxLTEuNTEtNS4yNmMuMDAxLTUuNDUgNC40MzYtOS44ODQgOS44ODgtOS44ODQgMi42NCAwIDUuMTIyIDEuMDMgNi45ODggMi44OThhOS44MjUgOS44MjUgMCAwMTIuODkzIDYuOTk0Yy0uMDAzIDUuNDUtNC40MzcgOS44ODQtOS44ODUgOS44ODRtOC40MTMtMTguMjk3QTExLjgxNSAxMS44MTUgMCAwMDEyLjA1IDBDNS40OTUgMCAuMTYgNS4zMzUuMTU3IDExLjg5MmMwIDIuMDk2LjU0NyA0LjE0MiAxLjU4OCA1Ljk0NUwuMDU3IDI0bDYuMzA1LTEuNjU0YTExLjg4MiAxMS44ODIgMCAwMDUuNjgzIDEuNDQ4aC4wMDVjNi41NTQgMCAxMS44OS01LjMzNSAxMS44OTMtMTEuODkzYTExLjgyMSAxMS44MjEgMCAwMC0zLjQ4LTguNDEzWiIvPjwvc3ZnPg==" alt="" width="22" height="22"></span><span class="label">اطلب عبر واتساب<small>0500701817</small></span><img class="chev" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOEE5QTgyIiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQuNSA1LjUgOCAxMmw2LjUgNi41Ii8+PC9zdmc+Cg==" alt="" width="18" height="18">
     </a>
     <a class="btn glass" href="https://almomyz2014-boop.github.io/Yamam/rawae-website/">
-      <span class="chip chip-website"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSI5Ii8+PGVsbGlwc2UgY3g9IjEyIiBjeT0iMTIiIHJ4PSI0IiByeT0iOSIvPjxwYXRoIGQ9Ik0zIDEyaDE4TTQuNiA3aDE0LjhNNC42IDE3aDE0LjgiLz48L3N2Zz4K" alt="" width="22" height="22"></span><span class="label">الموقع الإلكتروني<small>تصفح المنتجات والعروض</small></span><img class="chev" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOEE5QTgyIiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQuNSA1LjUgOCAxMmw2LjUgNi41Ii8+PC9zdmc+Cg==" alt="" width="18" height="18">
+      <span class="chip chip-website"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSI5Ii8+PGVsbGlwc2UgY3g9IjEyIiBjeT0iMTIiIHJ4PSI0IiByeT0iOSIvPjxwYXRoIGQ9Ik0zIDEyaDE4TTQuNiA3aDE0LjhNNC42IDE3aDE0LjgiLz48L3N2Zz4K" alt="" width="22" height="22"></span><span class="label">المتجر الإلكتروني<small>قريبًا</small></span><img class="chev" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOEE5QTgyIiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQuNSA1LjUgOCAxMmw2LjUgNi41Ii8+PC9zdmc+Cg==" alt="" width="18" height="18">
     </a>
     <a class="btn glass" href="https://almomyz2014-boop.github.io/Yamam/rawae-app/">
-      <span class="chip chip-app"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48cmVjdCB4PSI3IiB5PSIyLjUiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxOSIgcng9IjIuNSIvPjxwYXRoIGQ9Ik0xMC41IDE4LjVoMyIvPjwvc3ZnPgo=" alt="" width="22" height="22"></span><span class="label">التطبيق<small>اطلب وتابع طلبك</small></span><img class="chev" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOEE5QTgyIiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQuNSA1LjUgOCAxMmw2LjUgNi41Ii8+PC9zdmc+Cg==" alt="" width="18" height="18">
+      <span class="chip chip-app"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48cmVjdCB4PSI3IiB5PSIyLjUiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxOSIgcng9IjIuNSIvPjxwYXRoIGQ9Ik0xMC41IDE4LjVoMyIvPjwvc3ZnPgo=" alt="" width="22" height="22"></span><span class="label">التطبيق<small>قريبًا</small></span><img class="chev" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOEE5QTgyIiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQuNSA1LjUgOCAxMmw2LjUgNi41Ii8+PC9zdmc+Cg==" alt="" width="18" height="18">
     </a>
     <a class="btn glass" href="https://maps.app.goo.gl/Pa5Dbad2SqxCjPFn6">
       <span class="chip chip-orange"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTEyIDIxcy03LTUuNS03LTExYTcgNyAwIDAgMSAxNCAwYzAgNS41LTcgMTEtNyAxMVoiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjEwIiByPSIyLjYiLz48L3N2Zz4=" alt="" width="22" height="22"></span><span class="label">موقع المحل<small>الدلم، المملكة العربية السعودية</small></span><img class="chev" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOEE5QTgyIiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQuNSA1LjUgOCAxMmw2LjUgNi41Ii8+PC9zdmc+Cg==" alt="" width="18" height="18">
