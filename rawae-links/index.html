@@ -110,6 +110,15 @@ body {
 #disc-form label { display: block; font-size: 14px; font-weight: 700; color: #425939; margin-top: 12px; }
 #disc-form input { width: 100%; box-sizing: border-box; margin-top: 6px; padding: 12px 14px; border: 1px solid #D8E2CC; border-radius: 14px; font-family: inherit; font-size: 16px; color: #2E352B; background: #fff; }
 #disc-form input:focus { outline: none; border-color: #75AC3D; box-shadow: 0 0 0 3px rgba(117,172,61,0.18); }
+.dob-toggle, .dob-row { display: table; table-layout: fixed; width: 100%; border-spacing: 8px 0; margin-left: -8px; margin-right: -8px; }
+.dob-toggle { margin-top: 6px; }
+.dob-cell { display: table-cell; vertical-align: middle; }
+.dob-tab { width: 100%; box-sizing: border-box; display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 10px; border: 1px solid #D8E2CC; border-radius: 12px; background: #fff; font-family: inherit; font-size: 15px; font-weight: 700; color: #5A6B52; cursor: pointer; }
+.dob-tab.active { background: #477537; border-color: #477537; color: #fff; }
+.dob-row { margin-top: 8px; }
+.dob-row select { width: 100%; box-sizing: border-box; height: 48px; line-height: 1.2; padding: 0 10px; border: 1px solid #D8E2CC; border-radius: 14px; font-family: inherit; font-size: 15px; color: #2E352B; background: #fff; }
+.dob-convert { font-size: 13.5px; color: #477537; font-weight: 700; margin-top: 8px; }
+.card-use { margin-top: 10px; font-size: 13px; color: rgba(255,255,255,0.85); }
 .disc-consent { font-size: 12.5px; color: #7A8A72; margin-top: 14px; line-height: 1.7; }
 .disc-error { font-size: 14px; font-weight: 700; color: #B3261E; margin-top: 10px; }
 .disc-submit { margin-top: 14px; width: 100%; padding: 14px; display: flex; align-items: center; justify-content: center; min-height: 52px; box-sizing: border-box; border: none; border-radius: 999px; background: #75AC3D; color: #fff; font-family: inherit; font-size: 17px; font-weight: 700; cursor: pointer; }
@@ -344,15 +353,25 @@ body {
       <div class="disc-badge">15٪</div>
       <div>
         <h2>احصل على خصم 15٪</h2>
-        <p>سجّل بياناتك واحصل فوراً على بطاقة خصم صالحة 7 أيام على جميع المنتجات.</p>
+        <p>سجّل بياناتك واحصل فوراً على بطاقة خصم صالحة 7 أيام على جميع المنتجات، تُستخدم عبر واتساب وفي المحل.</p>
       </div>
     </div>
     <button class="disc-cta" id="disc-open" type="button">احصل على بطاقتي</button>
     <form id="disc-form" novalidate hidden>
-      <label>الاسم الكامل<input id="disc-name" type="text" autocomplete="name"></label>
+      <label>الاسم الكامل<input id="disc-name" type="text" autocomplete="name" placeholder="ادخل اسمك هنا"></label>
       <label>رقم الجوال<input id="disc-phone" type="tel" dir="ltr" placeholder="05xxxxxxxx" autocomplete="tel"></label>
       <label>البريد الإلكتروني<input id="disc-email" type="email" dir="ltr" placeholder="name@example.com" autocomplete="email"></label>
-      <label>تاريخ الميلاد<input id="disc-dob" type="date"></label>
+      <label>تاريخ الميلاد</label>
+      <div class="dob-toggle">
+        <span class="dob-cell"><button type="button" class="dob-tab active" data-cal="gregorian">ميلادي</button></span>
+        <span class="dob-cell"><button type="button" class="dob-tab" data-cal="hijri">هجري</button></span>
+      </div>
+      <div class="dob-row">
+        <span class="dob-cell"><select id="disc-day" aria-label="اليوم"><option value="">اليوم</option></select></span>
+        <span class="dob-cell"><select id="disc-month" aria-label="الشهر"><option value="">الشهر</option></select></span>
+        <span class="dob-cell"><select id="disc-year" aria-label="السنة"><option value="">السنة</option></select></span>
+      </div>
+      <p class="dob-convert" id="disc-convert" hidden></p>
       <p class="disc-consent">بتسجيلك، أنت توافق على أن يتواصل معك روائع الفاكهة للتجارة بالعروض والتحديثات.</p>
       <p class="disc-error" id="disc-error" hidden></p>
       <button class="disc-submit" id="disc-submit" type="submit">تأكيد التسجيل</button>
@@ -363,6 +382,7 @@ body {
         <div class="card-name" id="disc-card-name"></div>
         <div class="card-code" id="disc-card-code" dir="ltr"></div>
         <div class="card-meta"><span>صالحة حتى <b id="disc-card-exp"></b></span><span>على جميع المنتجات</span></div>
+        <div class="card-use">تُستخدم عبر واتساب وفي المحل</div>
       </div>
       <p class="card-note">التقط لقطة شاشة للبطاقة واحتفظ بها، وأظهرها عند الطلب.</p>
       <a class="disc-wa" id="disc-wa" href="https://wa.me/966500701817" target="_blank" rel="noopener">إرسال البطاقة واتساب للمحل</a>
@@ -413,6 +433,49 @@ body {
   if (!firebase.apps.length) firebase.initializeApp(CONFIG);
   var db = firebase.firestore();
 
+  // CAL-CONVERT-START
+  var G_MONTHS = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+  var H_MONTHS = ['محرم', 'صفر', 'ربيع الأول', 'ربيع الآخر', 'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان', 'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'];
+  var DAY_MS = 86400000;
+  var hijriFmt = null;
+  try {
+    hijriFmt = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn', { timeZone: 'UTC', day: 'numeric', month: 'numeric', year: 'numeric' });
+    hijriFmt.format(new Date(Date.UTC(2000, 0, 1)));
+  } catch (e) { hijriFmt = null; }
+  function gregToHijri(y, m, d) {
+    var parts = hijriFmt.formatToParts(new Date(Date.UTC(y, m - 1, d)));
+    var out = {};
+    for (var i = 0; i < parts.length; i++) {
+      if (parts[i].type === 'day') out.d = parseInt(parts[i].value, 10);
+      if (parts[i].type === 'month') out.m = parseInt(parts[i].value, 10);
+      if (parts[i].type === 'year') out.y = parseInt(parts[i].value, 10);
+    }
+    return out;
+  }
+  function hijriKey(y, m, d) { return y * 372 + m * 31 + d; }
+  function hijriToGreg(hy, hm, hd) {
+    var lo = Date.UTC(1930, 0, 1), hi = Date.UTC(2035, 11, 31);
+    var target = hijriKey(hy, hm, hd);
+    while (lo <= hi) {
+      var mid = lo + Math.floor((hi - lo) / 2 / DAY_MS) * DAY_MS;
+      var dt = new Date(mid);
+      var p = gregToHijri(dt.getUTCFullYear(), dt.getUTCMonth() + 1, dt.getUTCDate());
+      var val = hijriKey(p.y, p.m, p.d);
+      if (val === target) return dt;
+      if (val < target) lo = mid + DAY_MS; else hi = mid - DAY_MS;
+    }
+    return null;
+  }
+  function daysInHijriMonth(y, m) {
+    var first = hijriToGreg(y, m, 1);
+    var next = (m === 12) ? hijriToGreg(y + 1, 1, 1) : hijriToGreg(y, m + 1, 1);
+    if (!first || !next) return 30;
+    return Math.round((next.getTime() - first.getTime()) / DAY_MS);
+  }
+  function fmtHijriStr(y, m, d) { return d + ' ' + H_MONTHS[m - 1] + ' ' + y + 'هـ'; }
+  function fmtGregStr(y, m, d) { return d + ' ' + G_MONTHS[m - 1] + ' ' + y + 'م'; }
+  // CAL-CONVERT-END
+
   var openBtn = document.getElementById('disc-open');
   var form = document.getElementById('disc-form');
   var cardBox = document.getElementById('disc-card');
@@ -425,6 +488,132 @@ body {
     form.hidden = false;
     document.getElementById('disc-name').focus();
   });
+
+  // --- Birth-date picker: Gregorian / Hijri ---
+  var cal = 'gregorian';
+  var picked = null;
+  var daySel = document.getElementById('disc-day');
+  var monthSel = document.getElementById('disc-month');
+  var yearSel = document.getElementById('disc-year');
+  var convertLine = document.getElementById('disc-convert');
+  var tabs = document.querySelectorAll('.dob-tab');
+
+  function fillSelect(sel, items, placeholder) {
+    var prev = sel.value;
+    sel.innerHTML = '';
+    var ph = document.createElement('option');
+    ph.value = '';
+    ph.textContent = placeholder;
+    sel.appendChild(ph);
+    items.forEach(function (it) {
+      var op = document.createElement('option');
+      op.value = it[0];
+      op.textContent = it[1];
+      sel.appendChild(op);
+    });
+    if (prev) sel.value = prev;
+    if (sel.value !== prev) sel.value = '';
+  }
+  function populateYears() {
+    var now = new Date();
+    var items = [];
+    if (cal === 'gregorian') {
+      var y0 = now.getUTCFullYear();
+      for (var y = y0; y >= y0 - 100; y--) items.push([y, String(y)]);
+    } else {
+      var h = gregToHijri(now.getUTCFullYear(), now.getUTCMonth() + 1, now.getUTCDate());
+      for (var hy = h.y; hy >= h.y - 100; hy--) items.push([hy, String(hy)]);
+    }
+    fillSelect(yearSel, items, 'السنة');
+  }
+  function populateMonths() {
+    var names = (cal === 'gregorian') ? G_MONTHS : H_MONTHS;
+    var items = [];
+    for (var m = 1; m <= 12; m++) items.push([m, names[m - 1]]);
+    fillSelect(monthSel, items, 'الشهر');
+  }
+  function populateDays() {
+    var y = parseInt(yearSel.value, 10);
+    var m = parseInt(monthSel.value, 10);
+    var max = 31;
+    if (y && m) {
+      max = (cal === 'gregorian') ? new Date(Date.UTC(y, m, 0)).getUTCDate() : daysInHijriMonth(y, m);
+    }
+    var items = [];
+    for (var d = 1; d <= max; d++) items.push([d, String(d)]);
+    fillSelect(daySel, items, 'اليوم');
+  }
+  function syncFromSelects() {
+    picked = null;
+    convertLine.hidden = true;
+    var d = parseInt(daySel.value, 10);
+    var m = parseInt(monthSel.value, 10);
+    var y = parseInt(yearSel.value, 10);
+    if (!d || !m || !y) return;
+    var g;
+    if (cal === 'gregorian') {
+      g = new Date(Date.UTC(y, m - 1, d));
+      if (g.getUTCMonth() + 1 !== m) return;
+    } else {
+      g = hijriToGreg(y, m, d);
+      if (!g) return;
+    }
+    picked = g;
+    if (hijriFmt) {
+      var h = gregToHijri(g.getUTCFullYear(), g.getUTCMonth() + 1, g.getUTCDate());
+      convertLine.textContent = (cal === 'gregorian')
+        ? 'الموافق ' + fmtHijriStr(h.y, h.m, h.d)
+        : 'الموافق ' + fmtGregStr(g.getUTCFullYear(), g.getUTCMonth() + 1, g.getUTCDate());
+      convertLine.hidden = false;
+    }
+  }
+  function setCalendar(next) {
+    if (next === cal) return;
+    cal = next;
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].classList.toggle('active', tabs[i].getAttribute('data-cal') === cal);
+    }
+    var keep = picked;
+    picked = null;
+    populateYears();
+    populateMonths();
+    if (keep) {
+      if (cal === 'gregorian') {
+        yearSel.value = String(keep.getUTCFullYear());
+        monthSel.value = String(keep.getUTCMonth() + 1);
+        populateDays();
+        daySel.value = String(keep.getUTCDate());
+      } else if (hijriFmt) {
+        var h = gregToHijri(keep.getUTCFullYear(), keep.getUTCMonth() + 1, keep.getUTCDate());
+        yearSel.value = String(h.y);
+        monthSel.value = String(h.m);
+        populateDays();
+        daySel.value = String(h.d);
+      } else {
+        populateDays();
+      }
+      syncFromSelects();
+    } else {
+      populateDays();
+      syncFromSelects();
+    }
+  }
+  for (var t = 0; t < tabs.length; t++) {
+    (function (tab) {
+      tab.addEventListener('click', function () { setCalendar(tab.getAttribute('data-cal')); });
+    })(tabs[t]);
+  }
+  if (!hijriFmt) {
+    for (var t2 = 0; t2 < tabs.length; t2++) {
+      if (tabs[t2].getAttribute('data-cal') === 'hijri') tabs[t2].style.display = 'none';
+    }
+  }
+  yearSel.addEventListener('change', function () { populateDays(); syncFromSelects(); });
+  monthSel.addEventListener('change', function () { populateDays(); syncFromSelects(); });
+  daySel.addEventListener('change', syncFromSelects);
+  populateYears();
+  populateMonths();
+  populateDays();
 
   function showError(msg) {
     errBox.textContent = msg;
@@ -459,12 +648,10 @@ body {
     var name = document.getElementById('disc-name').value.trim();
     var phone = normPhone(document.getElementById('disc-phone').value);
     var email = document.getElementById('disc-email').value.trim();
-    var dob = document.getElementById('disc-dob').value;
     if (name.length < 2) { showError('فضلاً اكتب الاسم الكامل.'); return; }
     if (!/^05\d{8}$/.test(phone)) { showError('فضلاً اكتب رقم جوال سعودي صحيح يبدأ بـ 05.'); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { showError('فضلاً اكتب بريداً إلكترونياً صحيحاً.'); return; }
-    var dobDate = dob ? new Date(dob + 'T00:00:00') : null;
-    if (!dobDate || isNaN(dobDate.getTime()) || dobDate >= new Date() || dobDate.getFullYear() < 1900) {
+    if (!picked || picked.getTime() >= Date.now() || picked.getUTCFullYear() < 1900) {
       showError('فضلاً اختر تاريخ ميلاد صحيحاً.'); return;
     }
     submitBtn.disabled = true;
@@ -472,11 +659,19 @@ body {
     var now = new Date();
     var exp = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
     var code = makeCode();
+    var dobIso = picked.toISOString().slice(0, 10);
+    var dobHijri = '';
+    if (hijriFmt) {
+      var h = gregToHijri(picked.getUTCFullYear(), picked.getUTCMonth() + 1, picked.getUTCDate());
+      dobHijri = fmtHijriStr(h.y, h.m, h.d);
+    }
     db.collection('discountCards').add({
       name: name,
       phone: phone,
       email: email,
-      dob: dob,
+      dob: dobIso,
+      dobHijri: dobHijri,
+      dobCalendar: cal,
       code: code,
       createdAt: now.toISOString(),
       expiresAt: exp.toISOString(),
