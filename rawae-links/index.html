@@ -56,10 +56,6 @@ body {
 .photos { display: flex; margin-top: 26px; }
 .photos img { width: calc(33.33% - 10px); height: auto; margin: 0 5px; border-radius: 18px; box-shadow: 0 8px 20px rgba(46,53,43,0.14); }
 .bio p { font-size: 17.5px; font-weight: 400; }
-.bio .contact { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(46,53,43,0.12); font-size: 16px; font-weight: 500; }
-.bio .contact a { color: #477537; text-decoration: none; }
-.bio .contact .row { margin-top: 4px; }
-.bio .contact .row:first-child { margin-top: 0; }
 .about { border-radius: 26px; padding: 22px; margin-top: 22px; animation: rise 0.55s 0.10s ease both; }
 .about h2 { font-family: 'Thmanyah Serif Display', serif; font-size: 18px; font-weight: 900; color: #2E352B; text-align: center; }
 .about h2 img.leaf, .vm h3 img.leaf { width: 20px; height: 20px; vertical-align: -4px; margin-left: 6px; }
@@ -79,7 +75,7 @@ body {
 .value-item span { display: block; font-size: 13.5px; font-weight: 700; color: #425939; margin-top: 8px; line-height: 1.5; }
 .services { display: flex; flex-wrap: wrap; gap: 12px; }
 .svc { width: calc(50% - 6px); border-radius: 22px; padding: 18px 16px; text-align: center; }
-.svc .pill { display: inline-block; background: #E07830; color: #fff; font-weight: 700; font-size: 13.5px; padding: 5px 14px; border-radius: 999px; white-space: nowrap; }
+.svc .pill { display: inline-block; background: #E07830; color: #fff; font-weight: 700; font-size: 13.5px; padding: 5px 12px; border-radius: 999px; max-width: 100%; line-height: 1.6; }
 .svc p { font-size: 14px; margin-top: 10px; line-height: 1.7; }
 .adv-grid { display: flex; flex-wrap: wrap; justify-content: center; }
 .adv-item { width: calc(33.33% - 8px); margin: 0 4px 16px; text-align: center; }
@@ -124,11 +120,14 @@ body {
 .links a:nth-child(6) { animation-delay: 0.38s; }
 .links a:nth-child(7) { animation-delay: 0.43s; }
 .links a:nth-child(8) { animation-delay: 0.48s; }
+.links a:nth-child(9) { animation-delay: 0.53s; }
+.links a:nth-child(10) { animation-delay: 0.58s; }
 .chip { width: 44px; height: 44px; border-radius: 14px; flex: none; text-align: center; box-shadow: 0 4px 10px rgba(46,53,43,0.16); }
 .chip img { display: inline-block; width: 24px; height: 24px; margin-top: 10px; }
 .chip-whatsapp { background: #25D366; }
 .chip-website { background: #2E352B; }
 .chip-app { background: #477537; }
+.chip-email { background: #425939; }
 .chip-x { background: #000000; }
 .chip-instagram { background: linear-gradient(45deg, #F09433 0%, #E6683C 25%, #DC2743 50%, #CC2366 75%, #BC1888 100%); }
 .chip-snapchat { background: #FFFC00; }
@@ -137,6 +136,8 @@ body {
 .btn .label small { display: block; font-family: 'Thmanyah Sans', sans-serif; font-size: 13.5px; font-weight: 500; color: #7A8A72; }
 .btn .label small[dir="ltr"] { text-align: right; }
 .btn .chev { width: 18px; height: 18px; flex: none; }
+.wa-float { position: fixed; bottom: 20px; left: 18px; z-index: 50; width: 56px; height: 56px; border-radius: 50%; background: #25D366; box-shadow: 0 8px 22px rgba(37,211,102,0.45); display: flex; align-items: center; justify-content: center; text-decoration: none; }
+.wa-float img { display: block; width: 30px; height: 30px; }
 .footer { text-align: center; margin-top: 28px; animation: rise 0.55s 0.54s ease both; }
 .footer .delivery { font-family: 'Thmanyah Serif Display', serif; font-size: 18px; font-weight: 700; color: #477537; }
 .footer .name { font-size: 13.5px; font-weight: 400; color: #7A8A72; margin-top: 4px; }
@@ -171,10 +172,6 @@ body {
 
   <div class="bio glass">
     <p>طازج من السوق… إلى باب بيتك. ننتقي لك أجود الفواكه والخضروات الطازجة بعناية، مع عروض مستمرة وكل أسبوع.</p>
-    <div class="contact">
-      <div class="row">واتساب: <a href="https://wa.me/966500701817">0500701817</a></div>
-      <div class="row"><a href="mailto:info@rawaealfakiha.sa">info@rawaealfakiha.sa</a></div>
-    </div>
   </div>
 
   <div class="about glass">
@@ -312,6 +309,9 @@ body {
     <a class="btn glass" href="https://wa.me/966500701817">
       <span class="chip chip-whatsapp"><img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjRkZGRkZGIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+V2hhdHNBcHA8L3RpdGxlPjxwYXRoIGQ9Ik0xNy40NzIgMTQuMzgyYy0uMjk3LS4xNDktMS43NTgtLjg2Ny0yLjAzLS45NjctLjI3My0uMDk5LS40NzEtLjE0OC0uNjcuMTUtLjE5Ny4yOTctLjc2Ny45NjYtLjk0IDEuMTY0LS4xNzMuMTk5LS4zNDcuMjIzLS42NDQuMDc1LS4yOTctLjE1LTEuMjU1LS40NjMtMi4zOS0xLjQ3NS0uODgzLS43ODgtMS40OC0xLjc2MS0xLjY1My0yLjA1OS0uMTczLS4yOTctLjAxOC0uNDU4LjEzLS42MDYuMTM0LS4xMzMuMjk4LS4zNDcuNDQ2LS41Mi4xNDktLjE3NC4xOTgtLjI5OC4yOTgtLjQ5Ny4wOTktLjE5OC4wNS0uMzcxLS4wMjUtLjUyLS4wNzUtLjE0OS0uNjY5LTEuNjEyLS45MTYtMi4yMDctLjI0Mi0uNTc5LS40ODctLjUtLjY2OS0uNTEtLjE3My0uMDA4LS4zNzEtLjAxLS41Ny0uMDEtLjE5OCAwLS41Mi4wNzQtLjc5Mi4zNzItLjI3Mi4yOTctMS4wNCAxLjAxNi0xLjA0IDIuNDc5IDAgMS40NjIgMS4wNjUgMi44NzUgMS4yMTMgMy4wNzQuMTQ5LjE5OCAyLjA5NiAzLjIgNS4wNzcgNC40ODcuNzA5LjMwNiAxLjI2Mi40ODkgMS42OTQuNjI1LjcxMi4yMjcgMS4zNi4xOTUgMS44NzEuMTE4LjU3MS0uMDg1IDEuNzU4LS43MTkgMi4wMDYtMS40MTMuMjQ4LS42OTQuMjQ4LTEuMjg5LjE3My0xLjQxMy0uMDc0LS4xMjQtLjI3Mi0uMTk4LS41Ny0uMzQ3bS01LjQyMSA3LjQwM2gtLjAwNGE5Ljg3IDkuODcgMCAwMS01LjAzMS0xLjM3OGwtLjM2MS0uMjE0LTMuNzQxLjk4Mi45OTgtMy42NDgtLjIzNS0uMzc0YTkuODYgOS44NiAwIDAxLTEuNTEtNS4yNmMuMDAxLTUuNDUgNC40MzYtOS44ODQgOS44ODgtOS44ODQgMi42NCAwIDUuMTIyIDEuMDMgNi45ODggMi44OThhOS44MjUgOS44MjUgMCAwMTIuODkzIDYuOTk0Yy0uMDAzIDUuNDUtNC40MzcgOS44ODQtOS44ODUgOS44ODRtOC40MTMtMTguMjk3QTExLjgxNSAxMS44MTUgMCAwMDEyLjA1IDBDNS40OTUgMCAuMTYgNS4zMzUuMTU3IDExLjg5MmMwIDIuMDk2LjU0NyA0LjE0MiAxLjU4OCA1Ljk0NUwuMDU3IDI0bDYuMzA1LTEuNjU0YTExLjg4MiAxMS44ODIgMCAwMDUuNjgzIDEuNDQ4aC4wMDVjNi41NTQgMCAxMS44OS01LjMzNSAxMS44OTMtMTEuODkzYTExLjgyMSAxMS44MjEgMCAwMC0zLjQ4LTguNDEzWiIvPjwvc3ZnPg==" alt="" width="22" height="22"></span><span class="label">اطلب عبر واتساب<small>0500701817</small></span><img class="chev" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOEE5QTgyIiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQuNSA1LjUgOCAxMmw2LjUgNi41Ii8+PC9zdmc+Cg==" alt="" width="18" height="18">
     </a>
+    <a class="btn glass" href="mailto:info@rawaealfakiha.sa">
+      <span class="chip chip-email"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIyIiB5PSI0IiB3aWR0aD0iMjAiIGhlaWdodD0iMTYiIHJ4PSIyIi8+PHBhdGggZD0ibTIyIDctMTAgNkwyIDciLz48L3N2Zz4K" alt="" width="22" height="22"></span><span class="label">البريد الإلكتروني<small dir="ltr">info@rawaealfakiha.sa</small></span><img class="chev" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOEE5QTgyIiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQuNSA1LjUgOCAxMmw2LjUgNi41Ii8+PC9zdmc+Cg==" alt="" width="18" height="18">
+    </a>
     <a class="btn glass" href="https://almomyz2014-boop.github.io/Yamam/rawae-website/">
       <span class="chip chip-website"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSI5Ii8+PGVsbGlwc2UgY3g9IjEyIiBjeT0iMTIiIHJ4PSI0IiByeT0iOSIvPjxwYXRoIGQ9Ik0zIDEyaDE4TTQuNiA3aDE0LjhNNC42IDE3aDE0LjgiLz48L3N2Zz4K" alt="" width="22" height="22"></span><span class="label">المتجر الإلكتروني<small>قريبًا</small></span><img class="chev" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOEE5QTgyIiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQuNSA1LjUgOCAxMmw2LjUgNi41Ii8+PC9zdmc+Cg==" alt="" width="18" height="18">
     </a>
@@ -341,5 +341,6 @@ body {
     <div class="name">© 2026 روائع الفاكهة للتجارة. جميع الحقوق محفوظة.</div>
   </div>
 </div>
+<a class="wa-float" href="https://wa.me/966500701817" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب"><img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjRkZGRkZGIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+V2hhdHNBcHA8L3RpdGxlPjxwYXRoIGQ9Ik0xNy40NzIgMTQuMzgyYy0uMjk3LS4xNDktMS43NTgtLjg2Ny0yLjAzLS45NjctLjI3My0uMDk5LS40NzEtLjE0OC0uNjcuMTUtLjE5Ny4yOTctLjc2Ny45NjYtLjk0IDEuMTY0LS4xNzMuMTk5LS4zNDcuMjIzLS42NDQuMDc1LS4yOTctLjE1LTEuMjU1LS40NjMtMi4zOS0xLjQ3NS0uODgzLS43ODgtMS40OC0xLjc2MS0xLjY1My0yLjA1OS0uMTczLS4yOTctLjAxOC0uNDU4LjEzLS42MDYuMTM0LS4xMzMuMjk4LS4zNDcuNDQ2LS41Mi4xNDktLjE3NC4xOTgtLjI5OC4yOTgtLjQ5Ny4wOTktLjE5OC4wNS0uMzcxLS4wMjUtLjUyLS4wNzUtLjE0OS0uNjY5LTEuNjEyLS45MTYtMi4yMDctLjI0Mi0uNTc5LS40ODctLjUtLjY2OS0uNTEtLjE3My0uMDA4LS4zNzEtLjAxLS41Ny0uMDEtLjE5OCAwLS41Mi4wNzQtLjc5Mi4zNzItLjI3Mi4yOTctMS4wNCAxLjAxNi0xLjA0IDIuNDc5IDAgMS40NjIgMS4wNjUgMi44NzUgMS4yMTMgMy4wNzQuMTQ5LjE5OCAyLjA5NiAzLjIgNS4wNzcgNC40ODcuNzA5LjMwNiAxLjI2Mi40ODkgMS42OTQuNjI1LjcxMi4yMjcgMS4zNi4xOTUgMS44NzEuMTE4LjU3MS0uMDg1IDEuNzU4LS43MTkgMi4wMDYtMS40MTMuMjQ4LS42OTQuMjQ4LTEuMjg5LjE3My0xLjQxMy0uMDc0LS4xMjQtLjI3Mi0uMTk4LS41Ny0uMzQ3bS01LjQyMSA3LjQwM2gtLjAwNGE5Ljg3IDkuODcgMCAwMS01LjAzMS0xLjM3OGwtLjM2MS0uMjE0LTMuNzQxLjk4Mi45OTgtMy42NDgtLjIzNS0uMzc0YTkuODYgOS44NiAwIDAxLTEuNTEtNS4yNmMuMDAxLTUuNDUgNC40MzYtOS44ODQgOS44ODgtOS44ODQgMi42NCAwIDUuMTIyIDEuMDMgNi45ODggMi44OThhOS44MjUgOS44MjUgMCAwMTIuODkzIDYuOTk0Yy0uMDAzIDUuNDUtNC40MzcgOS44ODQtOS44ODUgOS44ODRtOC40MTMtMTguMjk3QTExLjgxNSAxMS44MTUgMCAwMDEyLjA1IDBDNS40OTUgMCAuMTYgNS4zMzUuMTU3IDExLjg5MmMwIDIuMDk2LjU0NyA0LjE0MiAxLjU4OCA1Ljk0NUwuMDU3IDI0bDYuMzA1LTEuNjU0YTExLjg4MiAxMS44ODIgMCAwMDUuNjgzIDEuNDQ4aC4wMDVjNi41NTQgMCAxMS44OS01LjMzNSAxMS44OTMtMTEuODkzYTExLjgyMSAxMS44MjEgMCAwMC0zLjQ4LTguNDEzWiIvPjwvc3ZnPg==" alt="" width="30" height="30"></a>
 </body>
 </html>
