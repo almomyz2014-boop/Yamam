@@ -50,23 +50,42 @@ body {
 .bio .contact a { color: #477537; text-decoration: none; }
 .bio .contact .row { margin-top: 4px; }
 .bio .contact .row:first-child { margin-top: 0; }
-.about { border-radius: 26px; padding: 22px; margin-top: 22px; text-align: center; animation: rise 0.55s 0.10s ease both; }
-.about h2 { font-family: 'Thmanyah Serif Display', serif; font-size: 20px; font-weight: 900; color: #2E352B; }
-.about p { font-size: 16px; margin-top: 8px; }
-.features { margin-top: 26px; }
-.features h2 { display: flex; align-items: center; gap: 14px; font-family: 'Thmanyah Serif Display', serif; font-size: 17px; font-weight: 700; color: #425939; text-align: center; margin-bottom: 14px; animation: rise 0.55s 0.14s ease both; }
-.features h2::before, .features h2::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(71,117,55,0), rgba(71,117,55,0.55), rgba(71,117,55,0)); }
-.grid { display: flex; flex-wrap: wrap; gap: 12px; }
-.feat { width: calc(50% - 6px); border-radius: 22px; padding: 18px 14px; text-align: center; animation: rise 0.55s ease both; }
-.feat:nth-child(1) { animation-delay: 0.18s; }
-.feat:nth-child(2) { animation-delay: 0.23s; }
-.feat:nth-child(3) { animation-delay: 0.28s; }
-.feat:nth-child(4) { animation-delay: 0.33s; }
-.feat .chip { display: inline-block; width: 52px; height: 52px; border-radius: 16px; }
-.feat .chip img { width: 26px; height: 26px; margin-top: 13px; }
-.chip-green { background: #477537; }
-.feat b { display: block; font-family: 'Thmanyah Serif Display', serif; font-size: 16.5px; font-weight: 700; margin-top: 10px; line-height: 1.5; }
-.feat span { display: block; font-size: 13.5px; color: #7A8A72; margin-top: 4px; line-height: 1.6; }
+.about { border-radius: 26px; padding: 22px; margin-top: 22px; animation: rise 0.55s 0.10s ease both; }
+.about h2 { font-family: 'Thmanyah Serif Display', serif; font-size: 20px; font-weight: 900; color: #2E352B; text-align: center; }
+.about p { font-size: 16px; margin-top: 10px; text-align: right; line-height: 1.8; }
+.sec { margin-top: 26px; }
+.sec-title { display: flex; align-items: center; gap: 14px; font-family: 'Thmanyah Serif Display', serif; font-size: 17px; font-weight: 700; color: #425939; text-align: center; margin-bottom: 14px; }
+.sec-title::before, .sec-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(71,117,55,0), rgba(71,117,55,0.55), rgba(71,117,55,0)); }
+.vm { display: flex; gap: 12px; }
+.vm .vm-card { flex: 1; border-radius: 22px; padding: 18px 16px; text-align: center; }
+.vm h3 { font-family: 'Thmanyah Serif Display', serif; font-size: 18px; font-weight: 900; color: #425939; }
+.vm p { font-size: 14px; margin-top: 6px; line-height: 1.7; }
+.values { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.value-pill { padding: 8px 18px; border-radius: 999px; border: 1.5px solid #75AC3D; background: rgba(255,255,255,0.60); font-weight: 700; font-size: 15px; color: #425939; }
+.services { display: flex; flex-wrap: wrap; gap: 12px; }
+.svc { width: calc(50% - 6px); border-radius: 22px; padding: 18px 16px; text-align: center; }
+.svc .pill { display: inline-block; background: #F2C500; color: #2E352B; font-weight: 700; font-size: 14.5px; padding: 5px 18px; border-radius: 999px; }
+.svc p { font-size: 14px; margin-top: 10px; line-height: 1.7; }
+.adv-list { display: flex; flex-direction: column; gap: 10px; }
+.adv { display: flex; align-items: center; gap: 12px; border-radius: 18px; padding: 13px 16px; font-size: 15.5px; font-weight: 500; text-align: right; }
+.adv .dot { width: 10px; height: 10px; border-radius: 50%; background: #75AC3D; flex: none; }
+.sectors { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.sector-chip { padding: 8px 16px; border-radius: 14px; background: rgba(71,117,55,0.12); font-size: 14.5px; font-weight: 500; color: #2E352B; }
+.steps { display: flex; gap: 12px; }
+.step { flex: 1; border-radius: 22px; padding: 18px 12px; text-align: center; }
+.step .step-num { display: inline-block; width: 38px; height: 38px; line-height: 38px; border-radius: 50%; background: #477537; color: #fff; font-weight: 700; font-size: 17px; }
+.step b { display: block; font-family: 'Thmanyah Serif Display', serif; font-size: 16px; font-weight: 700; margin-top: 10px; line-height: 1.5; }
+.step span { display: block; font-size: 13.5px; color: #5A6B52; margin-top: 4px; line-height: 1.6; }
+.faq-list { display: flex; flex-direction: column; gap: 10px; }
+.faq-item { border-radius: 18px; padding: 14px 18px; }
+.faq-item summary { font-weight: 700; font-size: 16px; color: #2E352B; cursor: pointer; list-style: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: "+"; float: left; color: #75AC3D; font-size: 20px; line-height: 1.4; }
+.faq-item[open ] summary::after { content: "−"; }
+.faq-item p { font-size: 15px; margin-top: 8px; line-height: 1.7; }
+.faq-more { text-align: center; font-size: 14.5px; margin-top: 14px; }
+.faq-more a { color: #477537; font-weight: 700; text-decoration: none; }
+.chip-orange { background: #E07830; }
 .offers-strip { border-radius: 22px; padding: 18px 20px; margin-top: 22px; text-align: center; animation: rise 0.55s 0.30s ease both; }
 .offers-strip b { font-family: 'Thmanyah Serif Display', serif; font-size: 18px; font-weight: 900; color: #425939; }
 .offers-strip p { font-size: 14.5px; margin-top: 4px; }
@@ -125,34 +144,122 @@ body {
   </div>
 
   <div class="about glass">
-    <h2>عن روائع الفاكهة</h2>
-    <p>محل خضار وفواكه في الدلم – الصحنة. نختار بضاعتنا من السوق كل يوم، ونعرضها طازجة مع عروض تتجدد كل أسبوع. اطلب عبر واتساب أو تفضل بزيارة المحل.</p>
+    <h2>نبذة عن المؤسسة</h2>
+    <p>تأسست مؤسسة روائع الفاكهة لتكون من الأسماء الرائدة في سوق الخضار والفواكه، حيث تختص بتوفير أجود أنواع الفاكهة والخضروات محليًا وعالميًا، مع خدمات بيع التجزئة والجملة وتقديم خدمات النقل المبرد للوصول إلى العملاء بسرعة وجودة عالية.</p>
+    <p>نلتزم بتقديم منتجات طازجة يوميًا، وبمعايير عالية من السلامة الغذائية، عبر منظومة متكاملة من الموردين الموثوقين، وأساليب التوزيع الحديثة.</p>
   </div>
 
-  <div class="features">
-    <h2>وش يميزنا</h2>
-    <div class="grid">
-      <div class="feat glass">
-        <span class="chip chip-green"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTUgMTlDNSA5IDExIDQgMjAgNGMwIDktNSAxNS0xNSAxNVoiLz48cGF0aCBkPSJNNSAxOUM5IDE1IDEzIDExIDE3IDciLz48L3N2Zz4=" alt="" width="26" height="26"></span>
-        <b>اختيار يومي طازج</b>
-        <span>ننتقي كل صنف بعناية قبل ما يوصل لك</span>
+  <div class="sec">
+    <div class="vm">
+      <div class="vm-card glass">
+        <h3>رؤيتنا</h3>
+        <p>أن نكون الخيار الأول لقطاع التجزئة والجملة والمطاعم والفنادق من خلال جودة منتجاتنا ودقة مواعيد التسليم.</p>
       </div>
-      <div class="feat glass">
-        <span class="chip chip-green"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTMgM2g4bDEwIDEwLTggOEwzIDExVjNaIi8+PGNpcmNsZSBjeD0iOCIgY3k9IjgiIHI9IjEuNiIgZmlsbD0iI0ZGRkZGRiIvPjwvc3ZnPg==" alt="" width="26" height="26"></span>
-        <b>عروض تتجدد كل أسبوع</b>
-        <span>عروض يومية وأسبوعية مستمرة</span>
-      </div>
-      <div class="feat glass">
-        <span class="chip chip-green"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTQgNWEyIDIgMCAwIDEgMi0yaDEyYTIgMiAwIDAgMSAyIDJ2MTBhMiAyIDAgMCAxLTIgMkg5bC01IDRWNVoiLz48L3N2Zz4=" alt="" width="26" height="26"></span>
-        <b>اطلب عبر واتساب</b>
-        <span>راسلنا على واتساب وطلبك يجهز</span>
-      </div>
-      <div class="feat glass">
-        <span class="chip chip-green"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTMgN2gxMXYxMEgzeiIvPjxwYXRoIGQ9Ik0xNCAxMGg0bDMgM3Y0aC03Ii8+PGNpcmNsZSBjeD0iNyIgY3k9IjE3LjUiIHI9IjEuOCIvPjxjaXJjbGUgY3g9IjE3IiBjeT0iMTcuNSIgcj0iMS44Ii8+PC9zdmc+" alt="" width="26" height="26"></span>
-        <b>توصيل لباب البيت</b>
-        <span>داخل الدلم والصحنة والرياض</span>
+      <div class="vm-card glass">
+        <h3>رسالتنا</h3>
+        <p>توفير منتجات رائعة طازجة ومتنوعة بأسعار تنافسية، مع بناء علاقات طويلة المدى مع عملائنا قائمة على الثقة والجودة.</p>
       </div>
     </div>
+  </div>
+
+  <div class="sec">
+    <h2 class="sec-title">قيمنا</h2>
+    <div class="values">
+      <span class="value-pill">الجودة أولاً</span>
+      <span class="value-pill">الالتزام بالمواعيد</span>
+      <span class="value-pill">الشفافية</span>
+      <span class="value-pill">التطوير المستمر</span>
+      <span class="value-pill">خدمة العملاء</span>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2 class="sec-title">خدماتنا</h2>
+    <div class="services">
+      <div class="svc glass">
+        <span class="pill">بيع التجزئة</span>
+        <p>توفير فواكه وخضروات طازجة لأصحاب المحلات والسوبر ماركت بكميات صغيرة ومتنوعة، مع سرعة في التوصيل.</p>
+      </div>
+      <div class="svc glass">
+        <span class="pill">البيع بالجملة</span>
+        <p>توريد كميات كبيرة لتجار الجملة والموزعين، بدقة في التجهيز والتغليف وبأسعار تنافسية.</p>
+      </div>
+      <div class="svc glass">
+        <span class="pill">توريد للفنادق والمطاعم</span>
+        <p>تجهيز طلبات يومية أو أسبوعية حسب الطلب بأعلى معايير الجودة.</p>
+      </div>
+      <div class="svc glass">
+        <span class="pill">خدمات النقليات</span>
+        <p>أسطول نقل مبرّد لضمان وصول المنتجات بحالتها الطازجة، مع إمكانية التوصيل داخل المدن أو بين المناطق.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2 class="sec-title">مميزاتنا التنافسية</h2>
+    <div class="adv-list">
+      <div class="adv glass"><span class="dot"></span>منتجات مختارة من أفضل المزارع المحلية والعالمية</div>
+      <div class="adv glass"><span class="dot"></span>أسطول نقل مبرّد 24/7</div>
+      <div class="adv glass"><span class="dot"></span>فريق متخصص في الفرز والتجهيز</div>
+      <div class="adv glass"><span class="dot"></span>مرونة في التعامل مع مختلف القطاعات</div>
+      <div class="adv glass"><span class="dot"></span>أسعار مناسبة وجودة ممتازة</div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2 class="sec-title">القطاعات المستفيدة</h2>
+    <div class="sectors">
+      <span class="sector-chip">محلات الخضار والفواكه</span>
+      <span class="sector-chip">السوبر ماركت</span>
+      <span class="sector-chip">المطاعم والكافيهات</span>
+      <span class="sector-chip">شركات التموين</span>
+      <span class="sector-chip">تجار الجملة</span>
+      <span class="sector-chip">الفنادق والمنتجعات</span>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2 class="sec-title">طريقة العمل</h2>
+    <div class="steps">
+      <div class="step glass">
+        <span class="step-num">1</span>
+        <b>التواصل والطلب</b>
+        <span>تواصل معنا عبر واتساب وأخبرنا بالفواكه أو الخضروات التي تريدها.</span>
+      </div>
+      <div class="step glass">
+        <span class="step-num">2</span>
+        <b>انتقاء المنتجات</b>
+        <span>نختار المنتجات الطازجة ونراجع طلبك بعناية قبل التجهيز.</span>
+      </div>
+      <div class="step glass">
+        <span class="step-num">3</span>
+        <b>التوصيل</b>
+        <span>نوصل طلبك إلى العنوان ضمن نطاق الخدمة المتاح.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2 class="sec-title">الأسئلة الشائعة</h2>
+    <div class="faq-list">
+      <details class="faq-item glass">
+        <summary>كيف أطلب من روائع الفاكهة؟</summary>
+        <p>يمكنك التواصل معنا عبر واتساب وذكر الفواكه أو الخضروات التي ترغب بها، ثم نراجع طلبك ونجهزه للتوصيل.</p>
+      </details>
+      <details class="faq-item glass">
+        <summary>ما المنتجات التي توفرونها؟</summary>
+        <p>نوفر الفواكه والخضروات الطازجة، ونختارها بعناية ثم نجهزها حسب الطلب.</p>
+      </details>
+      <details class="faq-item glass">
+        <summary>هل لديكم عروض متجددة؟</summary>
+        <p>نعم، نشارك عروضاً متجددة خلال الأسابيع على الفواكه والخضروات المتاحة لدينا.</p>
+      </details>
+      <details class="faq-item glass">
+        <summary>أين تقدمون خدمة التوصيل؟</summary>
+        <p>نقدم التوصيل داخل الدلم والصحنة والرياض، ويمكنك التواصل معنا عبر واتساب لتأكيد نطاق خدمة طلبك.</p>
+      </details>
+    </div>
+    <p class="faq-more">لم تجد إجابة سؤالك؟ <a href="https://wa.me/966500701817">تواصل معنا</a></p>
   </div>
 
   <div class="offers-strip glass">
@@ -171,6 +278,9 @@ body {
     <a class="btn glass" href="https://almomyz2014-boop.github.io/Yamam/rawae-app/">
       <span class="chip chip-app"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48cmVjdCB4PSI3IiB5PSIyLjUiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxOSIgcng9IjIuNSIvPjxwYXRoIGQ9Ik0xMC41IDE4LjVoMyIvPjwvc3ZnPgo=" alt="" width="22" height="22"></span><span class="label">التطبيق<small>اطلب وتابع طلبك</small></span><img class="chev" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOEE5QTgyIiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQuNSA1LjUgOCAxMmw2LjUgNi41Ii8+PC9zdmc+Cg==" alt="" width="18" height="18">
     </a>
+    <a class="btn glass" href="https://maps.app.goo.gl/Pa5Dbad2SqxCjPFn6">
+      <span class="chip chip-orange"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTEyIDIxcy03LTUuNS03LTExYTcgNyAwIDAgMSAxNCAwYzAgNS41LTcgMTEtNyAxMVoiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjEwIiByPSIyLjYiLz48L3N2Zz4=" alt="" width="22" height="22"></span><span class="label">موقع المحل<small>الدلم، المملكة العربية السعودية</small></span><img class="chev" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOEE5QTgyIiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQuNSA1LjUgOCAxMmw2LjUgNi41Ii8+PC9zdmc+Cg==" alt="" width="18" height="18">
+    </a>
     <a class="btn glass" href="https://x.com/rawaealfakiha">
       <span class="chip chip-x"><img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+WDwvdGl0bGU+PHBhdGggZD0iTTE0LjIzNCAxMC4xNjIgMjIuOTc3IDBoLTIuMDcybC03LjU5MSA4LjgyNEw3LjI1MSAwSC4yNThsOS4xNjggMTMuMzQzTC4yNTggMjRIMi4zM2w4LjAxNi05LjMxOEwxNi43NDkgMjRoNi45OTN6bS0yLjgzNyAzLjI5OS0uOTI5LTEuMzI5TDMuMDc2IDEuNTZoMy4xODJsNS45NjUgOC41MzIuOTI5IDEuMzI5IDcuNzU0IDExLjA5aC0zLjE4MnoiLz48L3N2Zz4=" alt="" width="22" height="22"></span><span class="label">اكس<small dir="ltr">@rawaealfakiha</small></span><img class="chev" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOEE5QTgyIiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMTQuNSA1LjUgOCAxMmw2LjUgNi41Ii8+PC9zdmc+Cg==" alt="" width="18" height="18">
     </a>
@@ -188,6 +298,7 @@ body {
   <div class="footer">
     <div class="delivery">نوصل داخل الدلم والصحنة والرياض.</div>
     <div class="name">روائع الفاكهة للتجارة</div>
+    <div class="name">© 2026 روائع الفاكهة للتجارة. جميع الحقوق محفوظة.</div>
   </div>
 </div>
 </body>
