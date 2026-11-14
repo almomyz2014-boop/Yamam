@@ -25,10 +25,11 @@ a, button, summary { -webkit-tap-highlight-color: transparent; }
 body {
   font-family: 'Thmanyah Sans', sans-serif; color: #2E352B; line-height: 1.6;
   background:
-    radial-gradient(620px 420px at 88% -4%, rgba(138,196,64,0.65), rgba(138,196,64,0) 62%),
-    radial-gradient(520px 400px at 4% 32%, rgba(167,188,81,0.58), rgba(167,188,81,0) 62%),
-    radial-gradient(560px 440px at 92% 78%, rgba(117,172,61,0.52), rgba(117,172,61,0) 62%),
-    radial-gradient(500px 380px at 10% 96%, rgba(71,117,55,0.42), rgba(71,117,55,0) 60%),
+    radial-gradient(620px 420px at 88% -4%, rgba(138,196,64,0.78), rgba(138,196,64,0) 62%),
+    radial-gradient(300px 220px at 10% 0%, rgba(224,120,48,0.20), rgba(224,120,48,0) 60%),
+    radial-gradient(520px 400px at 4% 32%, rgba(167,188,81,0.70), rgba(167,188,81,0) 62%),
+    radial-gradient(560px 440px at 92% 78%, rgba(117,172,61,0.62), rgba(117,172,61,0) 62%),
+    radial-gradient(500px 380px at 10% 96%, rgba(71,117,55,0.50), rgba(71,117,55,0) 60%),
     linear-gradient(170deg, #E8F1DC 0%, #F4F9ED 45%, #E4EDD3 100%);
   background-attachment: fixed; background-color: #F4F9ED;
 }
@@ -44,15 +45,14 @@ body {
 }
 .hero { text-align: center; padding: 40px 0 6px; animation: rise 0.55s ease both; }
 .logo-halo { display: inline-block; padding: 20px 30px 12px; border-radius: 50%; background: radial-gradient(circle at 50% 45%, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.30) 48%, rgba(255,255,255,0) 70%); }
-.hero img.logo { display: inline-block; width: 126px; height: auto; animation: float 5s ease-in-out infinite; }
-.hero h1 { font-family: 'Thmanyah Serif Display', serif; color: #2E352B; font-size: 34px; font-weight: 900; margin-top: 8px; line-height: 1.4; }
+.hero img.logo { display: inline-block; width: 148px; height: auto; animation: float 5s ease-in-out infinite; }
+.hero h1 { font-family: 'Thmanyah Serif Display', serif; color: #2E352B; font-size: 38px; font-weight: 900; margin-top: 6px; line-height: 1.4; }
 .hero .tagline {
-  display: inline-block; margin-top: 12px; padding: 7px 24px; border-radius: 999px;
-  background: rgba(255,255,255,0.55); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
-  border: 1px solid rgba(255,255,255,0.70); box-shadow: 0 6px 18px rgba(46,53,43,0.08);
-  font-family: 'Thmanyah Serif Display', serif; color: #425939; font-size: 18px; font-weight: 700;
+  display: inline-block; margin-top: 14px; padding: 8px 28px; border-radius: 999px;
+  background: #E07830; box-shadow: 0 8px 20px rgba(224,120,48,0.40);
+  font-family: 'Thmanyah Serif Display', serif; color: #fff; font-size: 18px; font-weight: 700;
 }
-.bio { border-radius: 26px; padding: 22px 22px 18px; margin-top: 22px; text-align: center; animation: rise 0.55s 0.08s ease both; }
+.bio { border-radius: 26px; border-top: 3px solid #75AC3D; padding: 22px 22px 18px; margin-top: 22px; text-align: center; animation: rise 0.55s 0.08s ease both; }
 .photos { display: flex; margin-top: 26px; }
 .photos img { width: calc(33.33% - 10px); height: auto; margin: 0 5px; border-radius: 18px; box-shadow: 0 8px 20px rgba(46,53,43,0.14); }
 .bio p { font-size: 17.5px; font-weight: 400; }
@@ -156,7 +156,6 @@ body {
 .links a:nth-child(9) { animation-delay: 0.53s; }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .glass { background: rgba(255,255,255,0.88); }
-  .hero .tagline { background: rgba(255,255,255,0.88); }
 }
 @supports not (gap: 1px) {
   .sec-title::before { margin-left: 14px; }
@@ -171,7 +170,7 @@ body {
 }
 @media (min-width: 700px) {
   .page { max-width: 640px; }
-  .hero h1 { font-size: 36px; }
+  .hero h1 { font-size: 40px; }
   .value-item, .adv-item { width: calc(20% - 8px); }
 }
 </style>
