@@ -100,6 +100,29 @@ body {
 .offers-strip { border-radius: 22px; padding: 18px 20px; margin-top: 22px; text-align: center; animation: rise 0.55s 0.30s ease both; background: linear-gradient(135deg, #477537 0%, #2E352B 100%); border: none; border-top: 3px solid #8AC440; color: #fff; }
 .offers-strip b { font-family: 'Thmanyah Serif Display', serif; font-size: 18px; font-weight: 900; color: #fff; }
 .offers-strip p { font-size: 14.5px; margin-top: 4px; color: rgba(255,255,255,0.88); }
+.discount { border-radius: 26px; padding: 22px; margin-top: 22px; text-align: center; animation: rise 0.55s 0.32s ease both; }
+.disc-head { display: flex; align-items: center; gap: 14px; text-align: right; }
+.disc-badge { flex: 0 0 auto; width: 64px; height: 64px; border-radius: 50%; background: #F5A623; color: #fff; font-family: 'Thmanyah Serif Display', serif; font-size: 22px; font-weight: 900; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 14px rgba(245,166,35,0.35); }
+.disc-head h2 { font-family: 'Thmanyah Serif Display', serif; font-size: 21px; font-weight: 900; color: #2E352B; }
+.disc-head p { font-size: 14.5px; color: #5A6B52; margin-top: 4px; line-height: 1.7; }
+.disc-cta { margin-top: 16px; width: 100%; padding: 14px; display: flex; align-items: center; justify-content: center; min-height: 52px; box-sizing: border-box; border: none; border-radius: 999px; background: #477537; color: #fff; font-family: inherit; font-size: 17px; font-weight: 700; cursor: pointer; box-shadow: 0 8px 18px rgba(71,117,55,0.30); }
+#disc-form { margin-top: 16px; text-align: right; }
+#disc-form label { display: block; font-size: 14px; font-weight: 700; color: #425939; margin-top: 12px; }
+#disc-form input { width: 100%; box-sizing: border-box; margin-top: 6px; padding: 12px 14px; border: 1px solid #D8E2CC; border-radius: 14px; font-family: inherit; font-size: 16px; color: #2E352B; background: #fff; }
+#disc-form input:focus { outline: none; border-color: #75AC3D; box-shadow: 0 0 0 3px rgba(117,172,61,0.18); }
+.disc-consent { font-size: 12.5px; color: #7A8A72; margin-top: 14px; line-height: 1.7; }
+.disc-error { font-size: 14px; font-weight: 700; color: #B3261E; margin-top: 10px; }
+.disc-submit { margin-top: 14px; width: 100%; padding: 14px; display: flex; align-items: center; justify-content: center; min-height: 52px; box-sizing: border-box; border: none; border-radius: 999px; background: #75AC3D; color: #fff; font-family: inherit; font-size: 17px; font-weight: 700; cursor: pointer; }
+.disc-submit:disabled { opacity: 0.6; cursor: default; }
+.disc-card { margin-top: 16px; border-radius: 20px; padding: 20px; text-align: center; background: linear-gradient(135deg, #477537 0%, #2E352B 100%); color: #fff; }
+.card-top { display: flex; justify-content: space-between; align-items: center; font-size: 13.5px; font-weight: 700; color: rgba(255,255,255,0.85); }
+.card-off { font-family: 'Thmanyah Serif Display', serif; font-size: 20px; font-weight: 900; color: #F5A623; }
+.card-name { font-size: 19px; font-weight: 700; margin-top: 14px; }
+.card-code { font-size: 30px; font-weight: 900; letter-spacing: 3px; margin-top: 8px; }
+.card-meta { display: flex; justify-content: space-between; margin-top: 14px; font-size: 13px; color: rgba(255,255,255,0.85); }
+.card-note { font-size: 13px; color: #7A8A72; margin-top: 12px; line-height: 1.7; }
+.disc-wa { display: block; margin-top: 12px; padding: 13px; border-radius: 999px; background: #25D366; color: #fff; font-weight: 700; font-size: 16px; text-decoration: none; }
+
 .links { margin-top: 26px; }
 .btn {
   display: flex; align-items: center; gap: 14px; width: 100%;
@@ -159,6 +182,7 @@ body {
   .sec-title::before { margin-left: 14px; }
   .sec-title::after { margin-right: 14px; }
   .vm > * + *, .steps > * + *, .btn > * + * { margin-right: 12px; }
+  .disc-head > * + * { margin-right: 14px; }
   .btn > * + * { margin-right: 14px; }
   .sectors > * { margin: 4px; }
   .services .svc { width: calc(50% - 12px); margin: 0 6px 12px 6px; }
@@ -315,6 +339,36 @@ body {
     <p>عروضنا تتجدد كل أسبوع — تابعنا على سناب شات أو راسلنا واتساب لعروض اليوم.</p>
   </div>
 
+  <div class="discount glass" id="discount">
+    <div class="disc-head">
+      <div class="disc-badge">15٪</div>
+      <div>
+        <h2>احصل على خصم 15٪</h2>
+        <p>سجّل بياناتك واحصل فوراً على بطاقة خصم صالحة 7 أيام على جميع المنتجات.</p>
+      </div>
+    </div>
+    <button class="disc-cta" id="disc-open" type="button">احصل على بطاقتي</button>
+    <form id="disc-form" novalidate hidden>
+      <label>الاسم الكامل<input id="disc-name" type="text" autocomplete="name"></label>
+      <label>رقم الجوال<input id="disc-phone" type="tel" dir="ltr" placeholder="05xxxxxxxx" autocomplete="tel"></label>
+      <label>البريد الإلكتروني<input id="disc-email" type="email" dir="ltr" placeholder="name@example.com" autocomplete="email"></label>
+      <label>تاريخ الميلاد<input id="disc-dob" type="date"></label>
+      <p class="disc-consent">بتسجيلك، أنت توافق على أن يتواصل معك روائع الفاكهة للتجارة بالعروض والتحديثات.</p>
+      <p class="disc-error" id="disc-error" hidden></p>
+      <button class="disc-submit" id="disc-submit" type="submit">تأكيد التسجيل</button>
+    </form>
+    <div id="disc-card" hidden>
+      <div class="disc-card">
+        <div class="card-top"><span>روائع الفاكهة للتجارة</span><span class="card-off">خصم 15٪</span></div>
+        <div class="card-name" id="disc-card-name"></div>
+        <div class="card-code" id="disc-card-code" dir="ltr"></div>
+        <div class="card-meta"><span>صالحة حتى <b id="disc-card-exp"></b></span><span>على جميع المنتجات</span></div>
+      </div>
+      <p class="card-note">التقط لقطة شاشة للبطاقة واحتفظ بها، وأظهرها عند الطلب.</p>
+      <a class="disc-wa" id="disc-wa" href="https://wa.me/966500701817" target="_blank" rel="noopener">إرسال البطاقة واتساب للمحل</a>
+    </div>
+  </div>
+
   <div class="links">
     <h2 class="sec-title"><img class="leaf" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM3NUFDM0QiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNNSAxOUM1IDkgMTEgNCAyMCA0YzAgOS01IDE1LTE1IDE1WiIvPjxwYXRoIGQ9Ik01IDE5QzkgMTUgMTMgMTEgMTcgNyIvPjwvc3ZnPg==" alt="" width="20" height="20">روابطنا</h2>
     <a class="btn glass" href="https://almomyz2014-boop.github.io/Yamam/rawae-website/">
@@ -352,5 +406,97 @@ body {
   </div>
 </div>
 <a class="wa-float" href="https://wa.me/966500701817" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب"><img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjRkZGRkZGIiByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+V2hhdHNBcHA8L3RpdGxlPjxwYXRoIGQ9Ik0xNy40NzIgMTQuMzgyYy0uMjk3LS4xNDktMS43NTgtLjg2Ny0yLjAzLS45NjctLjI3My0uMDk5LS40NzEtLjE0OC0uNjcuMTUtLjE5Ny4yOTctLjc2Ny45NjYtLjk0IDEuMTY0LS4xNzMuMTk5LS4zNDcuMjIzLS42NDQuMDc1LS4yOTctLjE1LTEuMjU1LS40NjMtMi4zOS0xLjQ3NS0uODgzLS43ODgtMS40OC0xLjc2MS0xLjY1My0yLjA1OS0uMTczLS4yOTctLjAxOC0uNDU4LjEzLS42MDYuMTM0LS4xMzMuMjk4LS4zNDcuNDQ2LS41Mi4xNDktLjE3NC4xOTgtLjI5OC4yOTgtLjQ5Ny4wOTktLjE5OC4wNS0uMzcxLS4wMjUtLjUyLS4wNzUtLjE0OS0uNjY5LTEuNjEyLS45MTYtMi4yMDctLjI0Mi0uNTc5LS40ODctLjUtLjY2OS0uNTEtLjE3My0uMDA4LS4zNzEtLjAxLS41Ny0uMDEtLjE5OCAwLS41Mi4wNzQtLjc5Mi4zNzItLjI3Mi4yOTctMS4wNCAxLjAxNi0xLjA0IDIuNDc5IDAgMS40NjIgMS4wNjUgMi44NzUgMS4yMTMgMy4wNzQuMTQ5LjE5OCAyLjA5NiAzLjIgNS4wNzcgNC40ODcuNzA5LjMwNiAxLjI2Mi40ODkgMS42OTQuNjI1LjcxMi4yMjcgMS4zNi4xOTUgMS44NzEuMTE4LjU3MS0uMDg1IDEuNzU4LS43MTkgMi4wMDYtMS40MTMuMjQ4LS42OTQuMjQ4LTEuMjg5LjE3My0xLjQxMy0uMDc0LS4xMjQtLjI3Mi0uMTk4LS41Ny0uMzQ3bS01LjQyMSA3LjQwM2gtLjAwNGE5Ljg3IDkuODcgMCAwMS01LjAzMS0xLjM3OGwtLjM2MS0uMjE0LTMuNzQxLjk4Mi45OTgtMy42NDgtLjIzNS0uMzc0YTkuODYgOS44NiAwIDAxLTEuNTEtNS4yNmMuMDAxLTUuNDUgNC40MzYtOS44ODQgOS44ODgtOS44ODQgMi42NCAwIDUuMTIyIDEuMDMgNi45ODggMi44OThhOS44MjUgOS44MjUgMCAwMTIuODkzIDYuOTk0Yy0uMDAzIDUuNDUtNC40MzcgOS44ODQtOS44ODUgOS44ODRtOC40MTMtMTguMjk3QTExLjgxNSAxMS44MTUgMCAwMDEyLjA1IDBDNS40OTUgMCAuMTYgNS4zMzUuMTU3IDExLjg5MmMwIDIuMDk2LjU0NyA0LjE0MiAxLjU4OCA1Ljk0NUwuMDU3IDI0bDYuMzA1LTEuNjU0YTExLjg4MiAxMS44ODIgMCAwMDUuNjgzIDEuNDQ4aC4wMDVjNi41NTQgMCAxMS44OS01LjMzNSAxMS44OTMtMTEuODkzYTExLjgyMSAxMS44MjEgMCAwMC0zLjQ4LTguNDEzWiIvPjwvc3ZnPg==" alt="" width="30" height="30"></a>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script>(function () {
+  var CONFIG = {"apiKey": "AIzaSyDs2mYR_bKw2sNr35WBfMOsalQUg6C2Jlk", "appId": "1:474606891640:web:3984fa9844bdda4dddb38d", "authDomain": "rawaealfakiha.firebaseapp.com", "messagingSenderId": "474606891640", "projectId": "rawaealfakiha", "storageBucket": "rawaealfakiha.firebasestorage.app"};
+  if (!firebase.apps.length) firebase.initializeApp(CONFIG);
+  var db = firebase.firestore();
+
+  var openBtn = document.getElementById('disc-open');
+  var form = document.getElementById('disc-form');
+  var cardBox = document.getElementById('disc-card');
+  var errBox = document.getElementById('disc-error');
+  var submitBtn = document.getElementById('disc-submit');
+  if (!openBtn || !form) return;
+
+  openBtn.addEventListener('click', function () {
+    openBtn.style.display = 'none';
+    form.hidden = false;
+    document.getElementById('disc-name').focus();
+  });
+
+  function showError(msg) {
+    errBox.textContent = msg;
+    errBox.hidden = false;
+  }
+
+  function normPhone(raw) {
+    var p = (raw || '').replace(/[\s\-()]/g, '');
+    if (p.indexOf('+966') === 0) p = '0' + p.slice(4);
+    else if (p.indexOf('966') === 0) p = '0' + p.slice(3);
+    return p;
+  }
+
+  function makeCode() {
+    var chars = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+    var out = '';
+    for (var i = 0; i < 6; i++) out += chars.charAt(Math.floor(Math.random() * chars.length));
+    return 'RW-' + out;
+  }
+
+  function fmtDate(d) {
+    try {
+      return new Intl.DateTimeFormat('ar-SA-u-ca-gregory', { day: 'numeric', month: 'long', year: 'numeric' }).format(d);
+    } catch (e) {
+      return d.toISOString().slice(0, 10);
+    }
+  }
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    errBox.hidden = true;
+    var name = document.getElementById('disc-name').value.trim();
+    var phone = normPhone(document.getElementById('disc-phone').value);
+    var email = document.getElementById('disc-email').value.trim();
+    var dob = document.getElementById('disc-dob').value;
+    if (name.length < 2) { showError('فضلاً اكتب الاسم الكامل.'); return; }
+    if (!/^05\d{8}$/.test(phone)) { showError('فضلاً اكتب رقم جوال سعودي صحيح يبدأ بـ 05.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { showError('فضلاً اكتب بريداً إلكترونياً صحيحاً.'); return; }
+    var dobDate = dob ? new Date(dob + 'T00:00:00') : null;
+    if (!dobDate || isNaN(dobDate.getTime()) || dobDate >= new Date() || dobDate.getFullYear() < 1900) {
+      showError('فضلاً اختر تاريخ ميلاد صحيحاً.'); return;
+    }
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'جاري التسجيل…';
+    var now = new Date();
+    var exp = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+    var code = makeCode();
+    db.collection('discountCards').add({
+      name: name,
+      phone: phone,
+      email: email,
+      dob: dob,
+      code: code,
+      createdAt: now.toISOString(),
+      expiresAt: exp.toISOString(),
+      used: false
+    }).then(function () {
+      form.hidden = true;
+      document.getElementById('disc-card-name').textContent = name;
+      document.getElementById('disc-card-code').textContent = code;
+      document.getElementById('disc-card-exp').textContent = fmtDate(exp);
+      var msg = 'مرحباً، سجلت في عرض خصم 15٪ من روائع الفاكهة للتجارة. اسمي: ' + name + '، ورمز بطاقتي: ' + code + '، صالحة حتى ' + fmtDate(exp) + '.';
+      document.getElementById('disc-wa').href = 'https://wa.me/966500701817?text=' + encodeURIComponent(msg);
+      cardBox.hidden = false;
+      cardBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }).catch(function () {
+      showError('تعذّر التسجيل الآن، حاول مرة أخرى.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'تأكيد التسجيل';
+    });
+  });
+})();
+</script>
 </body>
 </html>
